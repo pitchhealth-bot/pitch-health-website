@@ -1028,3 +1028,65 @@
     background-position:68% 47%;
   }
 }
+
+
+/* Careers benefit cards: richer Pitch purple, natural hover lift. */
+.career-benefits-section{
+  background:#f5eefb;
+  padding:76px 0 88px;
+}
+.career-benefits-grid{
+  gap:22px;
+  perspective:1000px;
+}
+.career-benefit{
+  position:relative;
+  min-height:174px;
+  padding:32px 35px;
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:15px;
+  background:linear-gradient(135deg,#682a95 0%,#4d1b77 100%);
+  box-shadow:0 8px 20px rgba(53,20,87,.10);
+  display:flex;
+  align-items:center;
+  gap:25px;
+  transform:translateY(0) scale(1);
+  transform-origin:center;
+  transition:transform .28s cubic-bezier(.2,.75,.25,1),box-shadow .28s ease,background .28s ease;
+  will-change:transform;
+}
+.career-benefit:nth-child(even){background:linear-gradient(135deg,#572087 0%,#421566 100%)}
+.career-benefit span{
+  color:#f5bcff;
+  font-size:15px;
+  font-weight:800;
+  flex-shrink:0;
+}
+.career-benefit p{
+  color:#fff;
+  font-size:clamp(17px,1.35vw,20px);
+  font-weight:600;
+  line-height:1.55;
+  max-width:460px;
+}
+@media(hover:hover) and (pointer:fine){
+  .career-benefit:hover{
+    z-index:2;
+    transform:translateY(-9px) scale(1.035);
+    background:linear-gradient(135deg,#7b35aa 0%,#59218a 100%);
+    box-shadow:0 22px 44px rgba(69,24,112,.28);
+  }
+}
+.career-page-action{
+  border-top-color:#d9c8e7;
+}
+@media(max-width:600px){
+  .career-benefits-section{padding:52px 0 68px}
+  .career-benefits-grid{gap:13px}
+  .career-benefit{min-height:120px;padding:24px;gap:18px}
+  .career-benefit p{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  .career-benefit{transition:none;will-change:auto}
+  .career-benefit:hover{transform:none}
+}
