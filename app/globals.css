@@ -1090,3 +1090,26 @@
   .career-benefit{transition:none;will-change:auto}
   .career-benefit:hover{transform:none}
 }
+
+
+/* Supporting copy for careers opportunity cards */
+.career-benefit{align-items:flex-start;min-height:205px}
+.career-benefit > span{padding-top:5px}
+.career-benefit-text{min-width:0}
+.career-benefit-text h3{
+  color:#fff;
+  font:600 clamp(17px,1.3vw,20px)/1.48 'Poppins',sans-serif;
+  letter-spacing:-.025em;
+  margin:0 0 14px;
+}
+.career-benefit-text p{
+  color:#efe2f8;
+  max-width:490px;
+  font:400 clamp(13px,1.05vw,15px)/1.75 'DM Sans',sans-serif;
+  margin:0;
+}
+@media(max-width:600px){
+  .career-benefit{min-height:0;padding:25px 21px}
+  .career-benefit-text h3{font-size:16px;margin-bottom:10px}
+  .career-benefit-text p{font-size:13px;line-height:1.65}
+}
