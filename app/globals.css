@@ -39,3 +39,17 @@
 .site-header nav a:hover{color:#f2a3ec}
 .site-header .nav-cta{background:#e991f5;color:#24122d;border-radius:11px;font-weight:800}
 @media(max-width:680px){.site-header .brand{width:180px;max-width:50vw}.site-header nav{color:white}}
+
+/* Original supplied Pitch Health hero artwork; preserve live selectable CTA and headline. */
+.hero.hero-photo{min-height:680px;background:#4e326d;isolation:isolate}
+.hero-photo-bg{position:absolute;inset:0;background-size:cover;background-position:center center;z-index:-2}
+.hero-photo-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,11,47,.48) 0%,rgba(34,15,48,.19) 40%,transparent 66%);z-index:-1;pointer-events:none}
+.hero.hero-photo::after,.hero.hero-photo .hero-corner,.hero.hero-photo .hero-bottom{display:none}
+.hero.hero-photo .hero-content{padding:100px 0;z-index:1}
+.hero.hero-photo h1{font-family:'DM Sans',sans-serif;font-size:clamp(42px,4.45vw,65px);font-weight:400;line-height:1.13;letter-spacing:-.035em;max-width:550px;margin:24px 0 50px;text-align:center}
+.hero.hero-photo h1 em{color:#fff;text-decoration-line:underline;text-decoration-color:#ed90f2;text-decoration-thickness:5px;text-underline-offset:10px}
+.hero.hero-photo .eyebrow{display:none}
+.hero.hero-photo .actions{justify-content:flex-start;margin-left:60px}
+.hero.hero-photo .actions .text-link{display:none}
+@media(max-width:900px){.hero.hero-photo .hero-photo-bg{background-position:59% center}.hero.hero-photo h1{max-width:460px;font-size:clamp(40px,5.8vw,54px)}.hero.hero-photo .actions{margin-left:0}}
+@media(max-width:680px){.hero.hero-photo{min-height:740px;align-items:flex-start}.hero.hero-photo .hero-photo-bg{background-size:auto 78%;background-repeat:no-repeat;background-position:61% bottom;background-color:#4b2a66}.hero.hero-photo .hero-photo-shade{background:linear-gradient(180deg,rgba(42,19,61,.55),rgba(42,19,61,.2) 45%,transparent 74%)}.hero.hero-photo .hero-content{padding:42px 0 0}.hero.hero-photo h1{text-align:left;font-size:clamp(36px,8vw,49px);max-width:410px;margin:0 0 22px}.hero.hero-photo .actions{margin:0;max-width:325px}.hero.hero-photo .hero-call-button{min-height:54px}}
