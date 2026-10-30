@@ -219,3 +219,19 @@
   .phs-footer-eoe{font-size:13px}
   .phs-footer-links{gap:14px 22px;font-size:12px}
 }
+
+/* Hero background: fill the entire cover instead of leaving a hard left-side gap. */
+.hero.hero-photo .hero-photo-bg {
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1101px) and (max-width: 1450px) {
+  .hero.hero-photo .hero-photo-bg { background-size: cover; background-position: right center; }
+}
+@media (max-width:1100px) {
+  .hero.hero-photo .hero-photo-bg { background-size: cover; background-position: 66% center; }
+}
+@media (max-width:680px) {
+  .hero.hero-photo .hero-photo-bg { background-size: cover; background-position: 64% center; }
+}
