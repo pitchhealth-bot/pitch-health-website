@@ -1129,3 +1129,18 @@
     background-position:right bottom;
   }
 }
+
+
+/* Live scheduled-business-hours indicator on contact card */
+.business-hours-status{
+  display:inline-flex;align-items:center;gap:11px;
+  padding:12px 14px;margin-top:-4px;
+  background:#fff;border:1px solid #e7dfeb;border-radius:11px;
+  max-width:100%;
+}
+.business-hours-status-dot{display:block;flex-shrink:0;width:10px;height:10px;border-radius:50%;background:#91839b}
+.business-hours-status.is-open .business-hours-status-dot{background:#23915e;box-shadow:0 0 0 4px rgba(35,145,94,.12)}
+.business-hours-status.is-away .business-hours-status-dot{background:#dc9c43;box-shadow:0 0 0 4px rgba(220,156,67,.13)}
+.business-hours-status-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.business-hours-status-label{font-size:13px;font-weight:800;color:#2b1b39;line-height:1.35}
+.business-hours-status-note{font-size:11px;line-height:1.4;color:#766d7f}
