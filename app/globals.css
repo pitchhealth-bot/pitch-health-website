@@ -1256,9 +1256,9 @@
     text-align:center;
   }
   .hero.hero-photo .hero-photo-bg{
-    background-position:91% bottom;
+    background-position:81% bottom;
   }
 }
 @media(max-width:380px){
-  .hero.hero-photo .hero-photo-bg{background-position:91% bottom}
+  .hero.hero-photo .hero-photo-bg{background-position:81% bottom}
 }
