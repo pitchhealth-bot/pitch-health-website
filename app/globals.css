@@ -31,3 +31,11 @@
 .floating-call-button:focus-visible,.hero-call-button:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 5px #541383}
 .floating-call-icon{font-size:19px;line-height:1}
 @media(max-width:680px){.hero-call-button{font-size:15px;min-width:0;width:100%;min-height:58px;padding:15px 12px}.floating-call-button{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:14px;min-height:50px;padding:11px 14px;max-width:calc(100vw - 24px)}.floating-call-icon{font-size:17px}}
+
+/* Official white logo belongs on the brand purple navigation background. */
+.site-header{background:#4b2869;color:white}
+.site-header .brand{flex-shrink:0;display:flex;align-items:center;width:290px;max-width:36vw}
+.site-header .brand img{width:100%!important;height:auto!important}
+.site-header nav a:hover{color:#f2a3ec}
+.site-header .nav-cta{background:#e991f5;color:#24122d;border-radius:11px;font-weight:800}
+@media(max-width:680px){.site-header .brand{width:180px;max-width:50vw}.site-header nav{color:white}}
