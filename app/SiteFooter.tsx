@@ -9,7 +9,7 @@ export default function SiteFooter() {
           <Link href="/" className="phs-footer-logo" aria-label="Pitch Health Solutions home">
             <OfficialLogo />
           </Link>
-          <p>Putting you first in every HealthCare decision.</p>
+          <p>Putting you first in every Healthcare decision.</p>
         </div>
 
         <nav className="phs-footer-nav" aria-label="Footer navigation">
