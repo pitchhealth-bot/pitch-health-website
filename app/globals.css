@@ -1113,3 +1113,19 @@
   .career-benefit-text h3{font-size:16px;margin-bottom:10px}
   .career-benefit-text p{font-size:13px;line-height:1.65}
 }
+
+
+/* Mobile hero focal-point adjustment: slightly larger family, right-edge anchored.
+   The original image stays unchanged; desktop layout is untouched. */
+@media(max-width:680px){
+  .hero.hero-photo .hero-photo-bg{
+    background-size:auto 110%;
+    background-position:right bottom;
+  }
+}
+@media(max-width:380px){
+  .hero.hero-photo .hero-photo-bg{
+    background-size:auto 110%;
+    background-position:right bottom;
+  }
+}
