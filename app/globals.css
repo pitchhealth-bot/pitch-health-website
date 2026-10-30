@@ -175,3 +175,47 @@
   .hero.hero-photo h1.hero-headline>span{white-space:normal}
   .hero.hero-photo .hero-call-button{min-width:0;width:100%;max-width:330px;min-height:56px;font-size:14px}
 }
+
+
+/* Official Pitch Health footer inspired by the original layered-purple design. */
+.phs-footer{
+  position:relative;isolation:isolate;overflow:hidden;
+  padding:55px 0 26px;
+  background:
+    linear-gradient(152deg,transparent 0 18%,rgba(191,172,215,.18) 18.1% 34%,transparent 34.1%),
+    linear-gradient(28deg,transparent 0 34%,rgba(206,194,225,.17) 34.1% 51%,transparent 51.1%),
+    linear-gradient(149deg,transparent 0 63%,rgba(206,194,225,.2) 63.1% 81%,transparent 81.1%),
+    linear-gradient(30deg,#2a1749 0%,#4f3b70 45%,#6d5e8a 100%);
+  color:#fff;
+}
+.phs-footer::before{
+  position:absolute;inset:0;z-index:-1;content:"";
+  background:linear-gradient(150deg,transparent 0 30%,rgba(220,207,238,.27) 30.08% 30.28%,transparent 30.36%),
+             linear-gradient(28deg,transparent 0 64%,rgba(34,18,57,.24) 64.08% 64.3%,transparent 64.38%);
+  pointer-events:none;
+}
+.phs-footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:52px;padding-bottom:38px}
+.phs-footer-logo{display:block;width:min(395px,45%);flex-shrink:0}
+.phs-footer-logo img{display:block;width:100%!important;height:auto!important}
+.phs-footer-contact{display:flex;flex-direction:column;align-items:flex-start;gap:15px;min-width:0}
+.phs-footer-contact h2{font-family:'Poppins',sans-serif;font-weight:400;font-size:clamp(24px,2.1vw,32px);letter-spacing:-.03em;margin:0 0 7px}
+.phs-footer-contact a{font-size:clamp(15px,1.25vw,19px);line-height:1.4;overflow-wrap:anywhere}
+.phs-footer-contact a:first-of-type{text-decoration:underline;text-underline-offset:3px}
+.phs-footer-contact a:hover,.phs-footer-links a:hover{color:#f3c1f8}
+.phs-footer-lower{text-align:center}
+.phs-footer-disclaimer{font-size:clamp(13px,1.05vw,17px);font-style:italic;line-height:1.55;color:#ede5f4;margin:12px 0 25px}
+.phs-footer-disclaimer strong{font-weight:700}
+.phs-footer-disclaimer a{text-decoration:underline;text-underline-offset:2px}
+.phs-footer-eoe{font-size:clamp(13px,1.1vw,17px);margin:0 auto 24px;line-height:1.6}
+.phs-footer-links{display:flex;justify-content:center;flex-wrap:wrap;align-items:center;gap:12px 28px;margin:0 auto;padding-top:18px;border-top:1px solid #ffffff55;font-size:13px;font-weight:600}
+.phs-footer-links a{white-space:nowrap}
+@media(max-width:680px){
+  .phs-footer{padding:38px 0 24px}
+  .phs-footer-top{flex-direction:column;gap:26px;padding-bottom:23px}
+  .phs-footer-logo{width:min(290px,86%)}
+  .phs-footer-contact{gap:10px}
+  .phs-footer-contact h2{font-size:24px;margin-bottom:0}
+  .phs-footer-disclaimer{font-size:13px}
+  .phs-footer-eoe{font-size:13px}
+  .phs-footer-links{gap:14px 22px;font-size:12px}
+}
