@@ -527,3 +527,33 @@
  .core-values-bottom>span:last-child{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.core-value-card,.core-values-controls button,.core-values-dots button{transition:none}}
+
+
+/* Keep the middle headline phrase on one deliberate line when space permits. */
+.hero.hero-photo h1.hero-headline .hero-middle-line {
+  display:block;
+  white-space:nowrap;
+  letter-spacing:-.055em;
+}
+.hero.hero-photo h1.hero-headline .hero-middle-line em{
+  font-size:1.02em;
+  margin-left:.03em;
+}
+@media(min-width:1101px){
+  .hero.hero-photo h1.hero-headline{
+    width:min(570px,47vw);
+    max-width:min(570px,47vw);
+    font-size:clamp(44px,3.25vw,54px);
+  }
+}
+@media(min-width:681px) and (max-width:1100px){
+  .hero.hero-photo h1.hero-headline .hero-middle-line{
+    white-space:normal;
+  }
+}
+@media(max-width:680px){
+  .hero.hero-photo h1.hero-headline .hero-middle-line{
+    white-space:normal;
+  }
+  .core-value-card h3{margin-top:50px}
+}
