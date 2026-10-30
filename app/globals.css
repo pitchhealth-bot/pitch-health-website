@@ -599,3 +599,177 @@
   .career-content h2{font-size:40px}
   .career-card-visual img{max-width:100%}
 }
+
+
+/* Mobile homepage rebuild: compact header and separately composed hero.
+   Scoped to small screens so the approved desktop design is unchanged. */
+@media (max-width:680px) {
+  html,body{max-width:100%;overflow-x:clip}
+  .site-header{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"logo update" "nav nav";
+    align-items:center;
+    gap:12px 12px;
+    height:auto;
+    min-height:0;
+    padding:17px 20px 13px;
+    background:#482760;
+  }
+  .site-header .brand{
+    grid-area:logo;
+    width:178px;
+    max-width:100%;
+    min-width:0;
+  }
+  .site-header .nav-cta{
+    grid-area:update;
+    margin:0;
+    padding:11px 12px;
+    min-height:41px;
+    border-radius:10px;
+    font-size:11px;
+    line-height:1.2;
+    white-space:nowrap;
+  }
+  .site-header .nav-cta span{margin-left:5px}
+  .site-header nav{
+    grid-area:nav;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    gap:13px;
+    flex-basis:auto;
+    margin:0;
+    padding:10px 1px 0;
+    border-top:1px solid rgba(255,255,255,.14);
+    font-size:12px;
+    font-weight:600;
+  }
+  .site-header nav a{white-space:nowrap}
+  .hero.hero-photo{
+    min-height:740px;
+    height:auto;
+    align-items:flex-start;
+    position:relative;
+    background:#4a2c63;
+    isolation:isolate;
+  }
+  .hero.hero-photo .hero-photo-bg {
+    position:absolute;
+    top:auto;
+    bottom:0;
+    left:0;
+    right:0;
+    height:51%;
+    background-size:cover;
+    background-position:61% 47%;
+    background-repeat:no-repeat;
+    z-index:-2;
+  }
+  .hero.hero-photo .hero-photo-shade {
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    background:linear-gradient(180deg,
+      rgba(47,25,67,0) 0%,
+      rgba(47,25,67,0) 43%,
+      rgba(47,25,67,.14) 55%,
+      rgba(47,25,67,0) 78%);
+    pointer-events:none;
+  }
+  .hero.hero-photo .hero-content {
+    width:calc(100% - 40px);
+    max-width:none;
+    padding:32px 0 0;
+    margin:0 auto;
+    z-index:2;
+  }
+  .hero.hero-photo h1.hero-headline {
+    width:100%;
+    max-width:100%;
+    margin:0 0 24px;
+    font-size:clamp(30px,7.3vw,38px);
+    line-height:1.12;
+    font-weight:600;
+    letter-spacing:-.055em;
+    text-align:left;
+    text-wrap:initial;
+    gap:0;
+  }
+  .hero.hero-photo h1.hero-headline>span{
+    display:block;
+    white-space:normal;
+  }
+  .hero.hero-photo h1.hero-headline .hero-middle-line{
+    white-space:normal;
+    letter-spacing:-.05em;
+  }
+  .hero.hero-photo h1.hero-headline em {
+    font-family:'Instrument Serif',Georgia,serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:1.08em;
+    letter-spacing:-.025em;
+    margin-left:.035em;
+  }
+  .hero.hero-photo .actions{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    justify-content:flex-start;
+  }
+  .hero.hero-photo .hero-call-button {
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    min-height:56px;
+    padding:13px 14px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:700;
+    box-shadow:none;
+  }
+  .floating-call-button{
+    position:fixed;
+    right:14px;
+    left:auto;
+    bottom:calc(18px + env(safe-area-inset-bottom,0px));
+    width:auto;
+    max-width:calc(100vw - 28px);
+    min-height:48px;
+    padding:11px 16px;
+    border-radius:14px;
+    font-size:13px;
+    box-shadow:0 7px 20px rgba(20,8,32,.25);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(16px);
+    transition:opacity .2s ease,transform .2s ease,visibility .2s;
+  }
+  .floating-call-button.floating-call-visible{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+  .floating-call-icon{font-size:15px}
+  .hero.hero-photo .hero-call-button:focus-visible,
+  .floating-call-button:focus-visible{outline-color:#fff}
+}
+@media (max-width:380px){
+  .site-header{padding:15px 14px 12px;column-gap:8px}
+  .site-header .brand{width:151px}
+  .site-header .nav-cta{padding:10px 8px;font-size:10px}
+  .hero.hero-photo{min-height:700px}
+  .hero.hero-photo .hero-content{width:calc(100% - 30px);padding-top:27px}
+  .hero.hero-photo h1.hero-headline{font-size:clamp(28px,7.7vw,33px)}
+}
+@media(min-width:681px) and (max-width:900px){
+ .hero.hero-photo h1.hero-headline{max-width:460px}
+}
+@media(prefers-reduced-motion:reduce){
+  .floating-call-button{transition:none}
+}
