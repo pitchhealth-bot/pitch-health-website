@@ -19,13 +19,13 @@ const values = [
     accent: "#b8afff",
   },
   {
-    title: "",
-    image: "https://images.squarespace-cdn.com/content/v1/68e2e3dcf5bd6f280a59912d/3f345bd0-1a3e-4b6e-87fa-904f8515aaea/8.png",
+    title: "Growth",
+    description: "Who we are today has created the results we have, but to achieve more, we must evolve. Growth means continually stretching beyond our current selves and becoming the kind of people capable of creating the next level of success.",
     accent: "#e88cdf",
   },
   {
-    title: "",
-    image: "https://images.squarespace-cdn.com/content/v1/68e2e3dcf5bd6f280a59912d/d516fb3a-f160-4be6-bdc5-2254c7b3e656/9.png",
+    title: "Innovation",
+    description: "We look for ways to improve how we work and serve others. We stay open to new ideas and better solutions.",
     accent: "#c59cff",
   },
 ];
@@ -92,16 +92,8 @@ export default function CoreValuesCarousel() {
                   <span className="core-value-number">{String(index + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}</span>
                   <span className="core-value-dot" style={{ background: value.accent }} aria-hidden="true" />
                 </div>
-                {value.image ? (
-                  <div className="core-value-original">
-                    <img src={value.image} alt={`Original Pitch Health core value ${index + 1}`} />
-                  </div>
-                ) : (
-                  <>
-                    <h3>{value.title}</h3>
-                    <p>{value.description}</p>
-                  </>
-                )}
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
               </article>
             );
           })}
