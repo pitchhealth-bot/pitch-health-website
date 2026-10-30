@@ -907,3 +907,32 @@
     background-position:50% 47%;
   }
 }
+
+
+/* Mobile family photo: show the complete group rather than crop the person on the right.
+   The 16:9 source has empty purple space on its left, so 128% width is a controlled
+   trim of that empty space (not cover-cropping the people). */
+@media (max-width:680px) {
+  .hero.hero-photo {
+    min-height: 660px;
+  }
+  .hero.hero-photo .hero-photo-bg {
+    left:0;
+    right:0;
+    bottom:0;
+    top:auto;
+    height:57%;
+    background-size:128% auto;
+    background-position:right bottom;
+    background-repeat:no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 12%);
+  }
+}
+@media (max-width:380px) {
+  .hero.hero-photo{min-height:630px}
+  .hero.hero-photo .hero-photo-bg {
+    background-size:128% auto;
+    background-position:right bottom;
+  }
+}
