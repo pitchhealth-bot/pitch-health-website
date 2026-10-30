@@ -20,7 +20,6 @@ export default function FloatingCallButton() {
     <a className={"floating-call-button" + (pastHero ? " floating-call-visible" : "")}
        href="tel:+18663241509"
        aria-label="Call Us (866) 324-1509">
-      <span className="floating-call-icon" aria-hidden="true">☎</span>
       <span>Call Us (866) 324-1509</span>
     </a>
   );
