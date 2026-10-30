@@ -84,3 +84,17 @@
   .hero.hero-photo .actions{justify-content:flex-start;width:340px}
   .hero.hero-photo .hero-call-button{font-size:14px;width:320px}
 }
+
+/* Official uploaded carrier artwork — no glyphs, fonts, or reconstructed branding. */
+.carrier-strip{background:#fff}
+.carrier-window{padding:23px 0;overflow:hidden}
+.carrier-track{display:flex;align-items:center;width:max-content}
+.carrier-set{display:flex;align-items:center;gap:72px;padding-right:72px;flex-shrink:0}
+.carrier-logo-image{width:250px;height:89px;flex:none;display:flex;align-items:center;justify-content:center}
+.carrier-logo-image img{display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:680px){
+  .carrier-window{padding:18px 0}
+  .carrier-set{gap:34px;padding-right:34px}
+  .carrier-logo-image{width:174px;height:66px;transform:none;margin:0}
+  .carrier-logo-image img{transform:none;margin:0}
+}
