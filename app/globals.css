@@ -395,3 +395,9 @@
  .about-modern h2{font-size:30px}
  .about-modern .intro-copy,.purpose-modern .purpose-body p{font-size:15px;line-height:1.8}
 }
+
+/* Final carrier ribbon refinements: slightly faster and no hairline border. */
+.carrier-strip{border:0!important;border-bottom:0!important;box-shadow:none!important}
+.carrier-window{border:0!important;border-bottom:0!important}
+.carrier-track{animation-duration:29s}
+@media(prefers-reduced-motion:reduce){.carrier-track{animation:none}}
