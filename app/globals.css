@@ -411,3 +411,119 @@
   letter-spacing:-.045em;
   color:#ef9df2;
 }
+
+
+/* Stacked carousel for authentic Pitch Health values */
+.core-values-section {
+  background:#3c1759;
+  color:#fff;
+  padding:94px 0 105px;
+  overflow:hidden;
+}
+.core-values-heading{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:32px;
+  margin-bottom:44px;
+}
+.core-values-eyebrow{
+  margin:0 0 15px;
+  color:#e5b6f2;
+  font:700 12px/1.5 'DM Sans',sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.core-values-heading h2{
+  margin:0;
+  color:#fff;
+  font:600 clamp(34px,4.3vw,58px)/1.16 'Poppins',sans-serif;
+  letter-spacing:-.055em;
+}
+.core-values-heading h2 span{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-style:italic;
+  font-weight:400;
+  color:#ef9df2;
+  letter-spacing:-.02em;
+}
+.core-values-intro{
+  font-size:15px;
+  line-height:1.7;
+  color:#e6d9ee;
+  margin:15px 0 0;
+}
+.core-values-controls{display:flex;gap:10px;flex-shrink:0}
+.core-values-controls button{
+  width:50px;height:50px;
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:50%;background:transparent;
+  color:white;font:400 24px/1 Arial,sans-serif;
+  cursor:pointer;transition:background .2s ease,color .2s ease;
+}
+.core-values-controls button:hover{background:#fff;color:#3c1759}
+.core-values-controls button:focus-visible,
+.core-values-dots button:focus-visible,
+.core-values-stage:focus-visible{outline:3px solid #f3a8fa;outline-offset:4px}
+.core-values-stage{
+  position:relative;
+  width:min(780px,calc(100% - 72px));
+  height:400px;
+  margin:0 auto 55px 0;
+  outline:none;
+  touch-action:pan-y;
+}
+.core-value-card{
+  position:absolute;left:0;top:0;width:100%;height:100%;
+  padding:clamp(26px,4vw,52px);
+  background:#fff;
+  color:#2b1939;
+  border-radius:18px;
+  border-top:6px solid #e88cdf;
+  box-shadow:0 22px 46px rgba(16,4,29,.20);
+  transition:transform .45s cubic-bezier(.2,.75,.2,1),opacity .3s ease;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.core-value-topline{display:flex;justify-content:space-between;align-items:center}
+.core-value-number{font:700 12px/1.4 'DM Sans',sans-serif;letter-spacing:.1em;color:#755889}
+.core-value-dot{width:11px;height:11px;border-radius:50%;display:block}
+.core-value-card h3{
+  margin:56px 0 18px;
+  font:600 clamp(31px,4vw,52px)/1.2 'Poppins',sans-serif;
+  letter-spacing:-.045em;color:#2c173b;
+}
+.core-value-card p{
+  margin:0;
+  max-width:660px;
+  font:400 clamp(15px,1.4vw,18px)/1.75 'DM Sans',sans-serif;
+  color:#51465b;
+}
+.core-value-original{display:flex;align-items:center;justify-content:center;flex:1;min-height:0;padding:10px 0 0}
+.core-value-original img{display:block;max-width:100%;max-height:100%;object-fit:contain;width:auto;height:auto}
+.core-values-bottom{
+  display:flex;align-items:center;
+  gap:26px;color:#d9bfec;
+  font-size:12px;letter-spacing:.02em;
+}
+.core-values-dots{display:flex;align-items:center;gap:9px}
+.core-values-dots button{width:9px;height:9px;border:0;border-radius:30px;background:rgba(255,255,255,.35);padding:0;cursor:pointer;transition:width .25s ease,background .25s}
+.core-values-dots button.active{width:27px;background:#e996ef}
+@media(max-width:900px){
+ .core-values-section{padding:72px 0 85px}
+ .core-values-stage{width:calc(100% - 55px);height:400px}
+}
+@media(max-width:620px){
+ .core-values-section{padding:54px 0 68px}
+ .core-values-heading{align-items:flex-end;gap:16px;margin-bottom:32px}
+ .core-values-heading h2{font-size:34px}
+ .core-values-intro{font-size:13px}
+ .core-values-controls button{width:41px;height:41px;font-size:22px}
+ .core-values-stage{height:420px;width:calc(100% - 42px);margin-bottom:53px}
+ .core-value-card{border-radius:12px;padding:27px 24px}
+ .core-value-card h3{font-size:35px;margin:40px 0 16px}
+ .core-value-card p{font-size:14px;line-height:1.65}
+ .core-values-bottom{gap:15px;flex-wrap:wrap}
+ .core-values-bottom>span:last-child{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.core-value-card,.core-values-controls button,.core-values-dots button{transition:none}}
