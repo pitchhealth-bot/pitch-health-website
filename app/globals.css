@@ -842,3 +842,68 @@
 
 /* Center the Explore careers label within its existing button. */
 .career-banner .button.button-light{justify-content:center;text-align:center;gap:0}
+
+
+/* Final requested mobile alignment: centered hero copy, photo and careers CTA. */
+@media (max-width:680px) {
+  .hero.hero-photo .hero-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    margin-inline:auto;
+    padding-top:22px;
+  }
+  .hero.hero-photo h1.hero-headline{
+    display:block;
+    width:100%;
+    max-width:370px;
+    margin:0 auto 22px;
+    text-align:center;
+    line-height:1.14;
+    font-size:clamp(30px,7.15vw,38px);
+  }
+  .hero.hero-photo h1.hero-headline > span{
+    display:block;
+    text-align:center;
+  }
+  .hero.hero-photo .hero-middle-line{
+    text-align:center;
+    white-space:normal;
+  }
+  .hero.hero-photo .actions{
+    display:flex;
+    width:100%;
+    justify-content:center;
+    align-items:center;
+    margin-inline:auto;
+  }
+  .hero.hero-photo .hero-call-button{
+    width:min(100%,350px);
+    margin-inline:auto;
+    justify-content:center;
+    text-align:center;
+  }
+  .hero.hero-photo .hero-photo-bg{
+    left:0;
+    right:0;
+    background-position:50% 47%;
+    background-size:cover;
+  }
+  .career-banner .button.button-light{
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+}
+@media (max-width:380px) {
+  .hero.hero-photo h1.hero-headline{
+    font-size:clamp(28px,7vw,34px);
+  }
+  .hero.hero-photo .hero-photo-bg{
+    background-position:50% 47%;
+  }
+}
