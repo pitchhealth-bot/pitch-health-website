@@ -773,3 +773,22 @@
 @media(prefers-reduced-motion:reduce){
   .floating-call-button{transition:none}
 }
+
+/* Mobile hero polish: bring the family photo closer to the raised copy.
+   Keep text unobstructed and blend the photo into the purple background. */
+@media (max-width:680px) {
+  .hero.hero-photo{min-height:685px}
+  .hero.hero-photo .hero-content{padding-top:20px}
+  .hero.hero-photo .hero-photo-bg{
+    height:69%;
+    background-position:61% 47%;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 16%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 16%);
+  }
+  .hero.hero-photo h1.hero-headline{margin-bottom:18px}
+  .hero.hero-photo .hero-call-button{min-height:52px}
+}
+@media(max-width:380px){
+  .hero.hero-photo{min-height:655px}
+  .hero.hero-photo .hero-content{padding-top:17px}
+}
