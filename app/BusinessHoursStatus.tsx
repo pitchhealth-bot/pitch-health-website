@@ -20,7 +20,7 @@ function getHoursStatus(date: Date): "open" | "away" {
   return businessDay && currentMinutes >= 9 * 60 && currentMinutes < 18 * 60 ? "open" : "away";
 }
 
-export default function BusinessHoursStatus() {
+export default function BusinessHoursStatus({ compact = false }: { compact?: boolean }) {
   const [status, setStatus] = useState<"open" | "away" | null>(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function BusinessHoursStatus() {
   }, []);
 
   return (
-    <div className={"business-hours-status " + (status === "open" ? "is-open" : status === "away" ? "is-away" : "is-checking")}>
+    <div title="Based on Monday–Friday, 9 AM–6 PM Eastern Time" className={"business-hours-status " + (compact ? "business-hours-compact " : "") + (status === "open" ? "is-open" : status === "away" ? "is-away" : "is-checking")}>
       <span className="business-hours-status-dot" aria-hidden="true" />
       <div className="business-hours-status-copy">
         <span className="business-hours-status-label" role="status" aria-live="polite">
