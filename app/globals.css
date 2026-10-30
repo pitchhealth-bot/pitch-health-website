@@ -1011,3 +1011,20 @@
 .career-page-hero-cta:focus-visible,.career-page-apply:focus-visible{outline:3px solid #e996ef;outline-offset:3px}
 @media(max-width:800px){.career-page-hero{padding:54px 0}.career-page-hero-grid{grid-template-columns:1fr;gap:34px}.career-page-hero h1{font-size:clamp(38px,7vw,54px)}.career-page-feature{max-width:620px}.career-benefits-section{padding:60px 0 75px}}
 @media(max-width:600px){.career-page-hero{padding:44px 0}.career-page-hero h1{font-size:clamp(37px,9.4vw,49px)}.career-page-hero-copy>p:not(.career-page-kicker){font-size:16px}.career-benefits-section{padding:48px 0 65px}.career-benefits-grid{grid-template-columns:1fr;gap:11px}.career-benefit{min-height:0;padding:21px 20px;gap:16px}.career-benefit p{font-size:15px}.career-benefits-heading h2{margin-bottom:26px}.career-page-action{align-items:stretch;flex-direction:column}.career-page-apply{width:100%}}
+
+
+/* Requested mobile family composition:
+   Restore the close-up second screenshot, then shift focal point to the child.
+   Do NOT change hero copy, buttons, or desktop styling. */
+@media(max-width:680px){
+  .hero.hero-photo .hero-photo-bg{
+    background-size:cover;
+    background-position:68% 47%;
+  }
+}
+@media(max-width:380px){
+  .hero.hero-photo .hero-photo-bg{
+    background-size:cover;
+    background-position:68% 47%;
+  }
+}
