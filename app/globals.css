@@ -98,3 +98,80 @@
   .carrier-logo-image{width:174px;height:66px;transform:none;margin:0}
   .carrier-logo-image img{transform:none;margin:0}
 }
+
+/* Hero v3: intentional left-aligned headline, protected portrait area.
+   Overrides earlier hero experiments and preserves the exact approved copy. */
+.hero.hero-photo {
+  min-height: 700px;
+  background: linear-gradient(105deg,#2d1645 0%,#44265f 48%,#603e7e 100%);
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+.hero.hero-photo .hero-photo-bg {
+  background-size:auto 100%;
+  background-position:right center;
+  background-repeat:no-repeat;
+}
+.hero.hero-photo .hero-photo-shade {
+  background:linear-gradient(90deg,rgba(34,14,52,.28) 0%,rgba(38,18,54,.14) 37%,transparent 65%);
+}
+.hero.hero-photo .hero-content {
+  padding:72px 0 82px;
+  width:min(1180px,calc(100% - 96px));
+}
+.hero.hero-photo h1.hero-headline {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  width:max-content;
+  max-width:min(660px,52%);
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+  font-size:clamp(43px,3.5vw,57px);
+  letter-spacing:-.055em;
+  line-height:1.13;
+  text-align:left;
+  text-wrap:initial;
+  margin:0 0 42px;
+}
+.hero.hero-photo h1.hero-headline>span {display:block;white-space:nowrap;}
+.hero.hero-photo h1.hero-headline em {
+  color:#ee9bf3;
+  font-style:normal;
+  text-decoration:none;
+}
+.hero.hero-photo .actions {
+  width:auto;
+  max-width:100%;
+  display:flex;
+  justify-content:flex-start;
+  margin:0;
+}
+.hero.hero-photo .hero-call-button {
+  width:auto;
+  min-width:332px;
+  min-height:64px;
+  font-size:16px;
+  font-weight:700;
+  padding:16px 28px;
+}
+@media (min-width:1101px) and (max-width:1450px) {
+  .hero.hero-photo .hero-photo-bg{background-size:auto 88%}
+  .hero.hero-photo h1.hero-headline{font-size:clamp(40px,3.5vw,49px);max-width:54%}
+}
+@media (max-width:1100px) {
+  .hero.hero-photo{min-height:830px;align-items:flex-start}
+  .hero.hero-photo .hero-photo-bg{background-size:auto 72%;background-position:right bottom}
+  .hero.hero-photo .hero-photo-shade{background:linear-gradient(180deg,rgba(34,14,52,.35) 0%,rgba(34,14,52,.14) 40%,transparent 75%)}
+  .hero.hero-photo .hero-content{width:calc(100% - 70px);padding:52px 0 0}
+  .hero.hero-photo h1.hero-headline{font-size:clamp(36px,4.65vw,50px);max-width:100%;margin-bottom:27px}
+}
+@media (max-width:680px) {
+  .hero.hero-photo{min-height:770px}
+  .hero.hero-photo .hero-photo-bg{background-size:auto 65%;background-position:64% bottom}
+  .hero.hero-photo .hero-content{width:calc(100% - 38px);padding:40px 0 0}
+  .hero.hero-photo h1.hero-headline{font-size:clamp(28px,6vw,38px);letter-spacing:-.055em;line-height:1.16;max-width:100%;margin-bottom:25px}
+  .hero.hero-photo h1.hero-headline>span{white-space:normal}
+  .hero.hero-photo .hero-call-button{min-width:0;width:100%;max-width:330px;min-height:56px;font-size:14px}
+}
