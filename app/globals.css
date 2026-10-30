@@ -982,3 +982,32 @@
   word-break:normal;
  }
 }
+
+
+/* Modern Careers page layout */
+.career-page-hero{background:#391951;color:#fff;padding:72px 0;overflow:hidden}
+.career-page-hero-grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(36px,5vw,78px);align-items:center}
+.career-page-kicker,.career-benefits-kicker{font-size:11px;letter-spacing:.14em;font-weight:700;margin:0 0 20px}
+.career-page-kicker{color:#ecc4f3}
+.career-page-hero h1{font:600 clamp(42px,4.2vw,65px)/1.13 'Poppins',sans-serif;letter-spacing:-.065em;margin:0;max-width:520px}
+.career-page-hero h1 span{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-style:italic;color:#eea6ef;letter-spacing:-.025em;white-space:nowrap}
+.career-page-hero-copy>p:not(.career-page-kicker){color:#e6d5ef;font-size:18px;line-height:1.65;margin:22px 0 30px}
+.career-page-hero-cta{display:inline-flex;justify-content:center;align-items:center;text-align:center;min-height:52px;background:#e996ef;color:#261035;font-weight:700;font-size:14px;padding:14px 25px;border-radius:9px}
+.career-page-hero-cta:hover{background:#f5b1fa}
+.career-page-feature{min-width:0}
+.career-page-feature img{display:block;width:100%;height:auto;object-fit:contain;border-radius:8px;filter:drop-shadow(0 16px 30px rgba(20,5,35,.22))}
+.career-page-main{width:100%}
+.career-benefits-section{padding:78px 0 96px;background:#fff}
+.career-benefits-kicker{color:#6d3c90}
+.career-benefits-heading h2{font:600 clamp(28px,3vw,40px)/1.25 'Poppins',sans-serif;letter-spacing:-.045em;margin:0 0 38px;color:#271a33}
+.career-benefits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.career-benefit{border:1px solid #e8e2ed;border-radius:12px;padding:27px 30px;min-height:147px;background:#faf9fc;display:flex;gap:22px;align-items:flex-start}
+.career-benefit span{color:#8b59a6;font:700 12px/1.8 'DM Sans',sans-serif;letter-spacing:.08em;flex-shrink:0}
+.career-benefit p{margin:0;color:#33263e;font-size:17px;line-height:1.6;font-weight:600;max-width:420px}
+.career-page-action{border-top:1px solid #e9e3ec;margin-top:44px;padding-top:31px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.career-page-action p{margin:0;font-size:18px;font-weight:600;color:#352541}
+.career-page-apply{display:inline-flex;align-items:center;justify-content:center;text-align:center;background:#541383;color:#fff;border-radius:9px;padding:16px 28px;min-height:55px;min-width:190px;font-size:14px;font-weight:700}
+.career-page-apply:hover{background:#6d2895}
+.career-page-hero-cta:focus-visible,.career-page-apply:focus-visible{outline:3px solid #e996ef;outline-offset:3px}
+@media(max-width:800px){.career-page-hero{padding:54px 0}.career-page-hero-grid{grid-template-columns:1fr;gap:34px}.career-page-hero h1{font-size:clamp(38px,7vw,54px)}.career-page-feature{max-width:620px}.career-benefits-section{padding:60px 0 75px}}
+@media(max-width:600px){.career-page-hero{padding:44px 0}.career-page-hero h1{font-size:clamp(37px,9.4vw,49px)}.career-page-hero-copy>p:not(.career-page-kicker){font-size:16px}.career-benefits-section{padding:48px 0 65px}.career-benefits-grid{grid-template-columns:1fr;gap:11px}.career-benefit{min-height:0;padding:21px 20px;gap:16px}.career-benefit p{font-size:15px}.career-benefits-heading h2{margin-bottom:26px}.career-page-action{align-items:stretch;flex-direction:column}.career-page-apply{width:100%}}
