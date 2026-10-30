@@ -1209,3 +1209,32 @@
   .site-header .business-hours-compact .business-hours-status-dot{height:10px;width:10px}
   .site-header .nav-cta{margin-left:0}
 }
+
+
+/* Tight mobile hero composition:
+   photo begins directly beneath the CTA, with all three faces visible.
+   This replaces the previous percentage-height photo that created a huge empty band. */
+@media (max-width:680px){
+  .hero.hero-photo{
+    min-height:565px;
+    height:565px;
+  }
+  .hero.hero-photo .hero-content{
+    padding-top:14px;
+  }
+  .hero.hero-photo .hero-photo-bg{
+    position:absolute;
+    inset:auto 0 0 0;
+    height:350px;
+    background-size:auto 118%;
+    background-position:85% bottom;
+    background-repeat:no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 6%);
+    mask-image:linear-gradient(to bottom,transparent 0%,#000 6%);
+  }
+  .hero.hero-photo .hero-call-button{min-height:52px}
+}
+@media (max-width:380px){
+  .hero.hero-photo{min-height:545px;height:545px}
+  .hero.hero-photo .hero-photo-bg{height:335px;background-size:auto 118%;background-position:85% bottom}
+}
