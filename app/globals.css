@@ -1144,3 +1144,43 @@
 .business-hours-status-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
 .business-hours-status-label{font-size:13px;font-weight:800;color:#2b1b39;line-height:1.35}
 .business-hours-status-note{font-size:11px;line-height:1.4;color:#766d7f}
+
+
+/* Mobile alignment refinement — center the persistent CTA and all main button labels. */
+@media(max-width:680px) {
+  .floating-call-button {
+    left:50%;
+    right:auto;
+    transform:translate(-50%,16px);
+    white-space:nowrap;
+    justify-content:center;
+    text-align:center;
+  }
+  .floating-call-button.floating-call-visible {
+    transform:translate(-50%,0);
+  }
+  .hero.hero-photo .hero-call-button,
+  .career-banner .button.button-light,
+  .site-header .nav-cta {
+    text-align:center;
+    justify-content:center;
+    align-items:center;
+  }
+  .career-banner .button.button-light {
+    margin-inline:auto;
+  }
+  /* Fit all three family members at an enlarged scale without cutting Grandma off. */
+  .hero.hero-photo .hero-photo-bg {
+    height:53%;
+    background-size:145% auto;
+    background-position:right bottom;
+    background-repeat:no-repeat;
+  }
+}
+@media(max-width:380px){
+  .hero.hero-photo .hero-photo-bg{
+    height:52%;
+    background-size:145% auto;
+    background-position:right bottom;
+  }
+}
