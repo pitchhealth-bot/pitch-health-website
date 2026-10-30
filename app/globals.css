@@ -22,3 +22,12 @@
 @keyframes carrier-scroll{to{transform:translateX(-50%)}}
 @media(max-width:680px){.carrier-window{padding:22px 0}.carrier-set{gap:38px;padding-right:38px}.carrier-logo{transform:scale(.72);transform-origin:center;margin:0 -15px}}
 @media(prefers-reduced-motion:reduce){.carrier-track{animation:none}.carrier-window{overflow-x:auto}}
+
+/* Primary hero CTA and persistent click-to-call action */
+.hero-call-button{background:#e991f5;color:#22142c;border-radius:12px;font-size:18px;font-weight:800;min-width:300px;min-height:68px;justify-content:center;box-shadow:0 8px 24px rgba(32,12,52,.12);transition:background-color .15s ease,transform .15s ease}
+.hero-call-button:hover{background:#f1a7fa;transform:translateY(-2px)}
+.floating-call-button{position:fixed;right:24px;bottom:24px;z-index:1000;display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:13px 20px;border-radius:14px;background:#e991f5;color:#24122d;font-size:16px;font-weight:800;line-height:1.2;box-shadow:0 8px 32px rgba(25,6,36,.29);text-decoration:none;transition:background-color .15s ease,transform .15s ease}
+.floating-call-button:hover{background:#f1a7fa;transform:translateY(-2px)}
+.floating-call-button:focus-visible,.hero-call-button:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 5px #541383}
+.floating-call-icon{font-size:19px;line-height:1}
+@media(max-width:680px){.hero-call-button{font-size:15px;min-width:0;width:100%;min-height:58px;padding:15px 12px}.floating-call-button{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));font-size:14px;min-height:50px;padding:11px 14px;max-width:calc(100vw - 24px)}.floating-call-icon{font-size:17px}}
