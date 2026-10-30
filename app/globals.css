@@ -792,3 +792,50 @@
   .hero.hero-photo{min-height:655px}
   .hero.hero-photo .hero-content{padding-top:17px}
 }
+
+/* CTA polish: center labels and keep contact details clean on mobile. */
+.career-banner .button.button-light,
+.hero.hero-photo .hero-call-button,
+.floating-call-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:0;
+}
+.contact-card a {
+  display:block;
+  text-decoration:none;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.contact-card a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:680px) {
+  .career-banner .button.button-light{
+    display:flex;
+    width:min(100%,320px);
+    min-height:54px;
+    margin:0;
+    padding:15px 20px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .contact h2{
+    font-size:clamp(31px,8.2vw,42px);
+    line-height:1.17;
+    overflow-wrap:normal;
+  }
+  .contact-card{
+    padding:25px 21px;
+    gap:22px;
+    min-width:0;
+  }
+  .contact-card a{
+    font-size:clamp(14px,3.8vw,17px);
+    font-weight:600;
+    line-height:1.55;
+    overflow-wrap:anywhere;
+  }
+  .contact-card .micro-label{font-size:11px}
+}
