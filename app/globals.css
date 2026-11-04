@@ -1449,3 +1449,53 @@
 .phs-survey-fallback{text-align:center;font:400 13px/1.7 'DM Sans',sans-serif;color:#6f627a;margin:24px 0 0}
 .phs-survey-fallback a{color:#5d207e;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){.phs-survey-header{padding:43px 0 58px}.phs-survey-header h1{font-size:clamp(30px,8vw,43px)}.phs-survey-section{padding-bottom:50px}.phs-survey-embed{border-radius:12px;margin-top:-22px}.phs-survey-embed iframe{height:1150px}.phs-survey-header p:last-child{font-size:14px}}
+
+
+/* Native Pitch Health survey preview: no embedded Airtable frame */
+.phs-survey-header{padding:65px 0 80px}
+.phs-survey-section{padding:0 0 85px}
+.phs-native-survey{position:relative;max-width:820px;margin:-37px auto 0;background:#fff;border:1px solid #eadfee;border-radius:20px;overflow:hidden;box-shadow:0 18px 55px rgba(43,16,65,.09);padding:clamp(24px,4vw,47px)}
+.phs-native-survey-preview{display:flex;align-items:center;gap:10px;max-width:100%;padding:11px 15px;margin-bottom:30px;border:1px solid #e7d7ee;background:#f7effb;border-radius:9px;font:600 12px/1.5 'DM Sans',sans-serif;color:#67447e}
+.phs-native-survey-preview-dot{display:block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#a260ca}
+.phs-native-survey-top{display:flex;align-items:end;justify-content:space-between;gap:16px}
+.phs-native-survey-overline{margin:0 0 10px;color:#8646a4;font-size:11px;font-weight:800;letter-spacing:.14em}
+.phs-native-survey-top h2{margin:0;font:600 clamp(25px,3vw,36px)/1.2 'Poppins',sans-serif;letter-spacing:-.05em;color:#2a1937}
+.phs-native-survey-count{color:#876a99;font:700 12px 'DM Sans',sans-serif;white-space:nowrap;padding-bottom:5px}
+.phs-native-survey-progress{height:5px;background:#efe5f3;border-radius:99px;margin:26px 0 37px;overflow:hidden}
+.phs-native-survey-progress span{display:block;height:100%;border-radius:99px;background:#8b3caf;transition:width .25s ease}
+.phs-native-survey-step-label{font:800 11px/1.5 'DM Sans',sans-serif;letter-spacing:.14em;color:#7e4c99;margin:0 0 21px}
+.phs-native-survey-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.phs-native-survey-fields label,.phs-native-survey-long{display:flex;flex-direction:column;gap:9px;font:700 14px/1.5 'DM Sans',sans-serif;color:#31243b;min-width:0}
+.phs-native-survey-fields label span,.phs-native-survey-long>span,.phs-native-survey-fieldset legend span{display:inline;color:#984cb7}
+.phs-native-survey-fields input,.phs-native-survey-long input,.phs-native-survey-long textarea{display:block;width:100%;border:1px solid #ddd3e4;border-radius:10px;background:#fff;min-height:51px;padding:12px 14px;font:400 15px/1.5 'DM Sans',sans-serif;color:#2c1c37;outline:none}
+.phs-native-survey-long textarea{resize:vertical;min-height:115px}
+.phs-native-survey-fields input:focus,.phs-native-survey-long input:focus,.phs-native-survey-long textarea:focus{border-color:#904db5;box-shadow:0 0 0 3px rgba(144,77,181,.12)}
+.phs-native-survey-fieldset{border:0;min-width:0;margin:0;padding:0}
+.phs-native-survey-fieldset legend{margin:0 0 17px;padding:0;color:#2d203b;font:700 16px/1.6 'DM Sans',sans-serif}
+.phs-native-survey-choices{display:grid;grid-template-columns:1fr;gap:12px}
+.phs-native-survey-choices label{display:flex;align-items:center;gap:14px;cursor:pointer;min-height:70px;border:1px solid #e5ddea;background:white;border-radius:12px;padding:14px 19px;transition:border-color .16s,background .16s}
+.phs-native-survey-choices label:hover,.phs-native-survey-choices label.selected{border-color:#a869c9;background:#f9f3fd}
+.phs-native-survey-choices input,.phs-native-survey-rating input{accent-color:#742a98;width:17px;height:17px;flex-shrink:0}
+.phs-native-survey-choice-copy{display:flex;flex-direction:column;gap:4px}
+.phs-native-survey-choice-copy strong{font-size:15px;color:#31213b}
+.phs-native-survey-choice-copy small{font-size:12px;color:#776a80}
+.phs-native-survey-branch{margin-top:26px;padding:25px;background:#faf7fc;border:1px solid #efe4f3;border-radius:14px}
+.phs-native-survey-branch .phs-native-survey-long{margin-top:20px}
+.phs-native-survey-branch .phs-native-survey-long:first-child{margin-top:0}
+.phs-native-survey-rating{display:flex;gap:10px;flex-wrap:wrap}
+.phs-native-survey-rating label{display:flex;justify-content:center;align-items:center;gap:9px;min-width:67px;height:49px;border:1px solid #ddd0e7;border-radius:10px;background:#fff;font-weight:700;color:#3d2951;cursor:pointer}
+.phs-native-survey-rating label.selected{background:#f0e1f7;border-color:#a86bcb}
+.phs-native-survey-actions{display:flex;justify-content:flex-end;gap:13px;align-items:center;margin-top:35px}
+.phs-native-survey-back,.phs-native-survey-next{border-radius:10px;min-height:50px;padding:12px 25px;font:700 14px 'DM Sans',sans-serif;cursor:pointer}
+.phs-native-survey-back{border:1px solid #ded0e9;color:#4f2b64;background:#fff}
+.phs-native-survey-next{border:1px solid #602383;background:#602383;color:#fff}
+.phs-native-survey-next:hover{background:#7732a0}
+.phs-native-survey-note{margin:20px 0 0;font:400 12px/1.6 'DM Sans',sans-serif;color:#817389}
+.phs-native-survey-review h3{font:600 27px 'Poppins',sans-serif;letter-spacing:-.035em;color:#2d1940;margin:0 0 12px}
+.phs-native-survey-review>p{color:#65586f;line-height:1.7}
+.phs-native-survey-review dl{margin:25px 0 0;border-top:1px solid #e9dfef}
+.phs-native-survey-review dl div{display:grid;grid-template-columns:135px minmax(0,1fr);gap:15px;padding:13px 0;border-bottom:1px solid #e9dfef}
+.phs-native-survey-review dt{font-weight:700;color:#513065}
+.phs-native-survey-review dd{margin:0;color:#34263e;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:650px){.phs-native-survey{padding:23px 18px;margin-top:-24px;border-radius:14px}.phs-native-survey-preview{font-size:11px}.phs-native-survey-fields{grid-template-columns:1fr}.phs-native-survey-branch{padding:18px 14px}.phs-native-survey-review dl div{grid-template-columns:1fr;gap:4px}.phs-native-survey-actions{justify-content:stretch}.phs-native-survey-next,.phs-native-survey-back{flex:1;padding:12px 14px}}
+@media(prefers-reduced-motion:reduce){.phs-native-survey-progress span,.phs-native-survey-choices label{transition:none}}
