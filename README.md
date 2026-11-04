@@ -8,6 +8,14 @@ Run `npm install && npm run dev`.
 
 ## Insurance Agent Application
 
+The endpoint now requires Airtable storage as well as the existing Resend email
+delivery. See [APPLICATION_INTEGRATION.md](APPLICATION_INTEGRATION.md) for the exact
+field mapping, server environment variables, private résumé uploads, retry behavior,
+and release verification. The three additional required variables are
+`AIRTABLE_ACCESS_TOKEN`, `AIRTABLE_BASE_ID`, and `AIRTABLE_TABLE_ID`; the email
+configuration described below remains required. The availability gate requires
+all seven variables, including the explicit intake flag.
+
 The new /apply page includes a redesigned, responsive application form. The original Squarespace export did **not** contain individual form questions or delivery configuration. Screenshots supplied later confirmed the required resident-state dropdown (50 states + DC), 18+ question, Health/Life/Both/Not licensed choices, conditional carrier-release or two-week licensing question, last insurance-employment date for licensed applicants, and mandatory résumé upload. The source of these details is the user's original form screenshots. The résumé can be PDF, DOC or DOCX (maximum 4 MB). Form submissions use multipart POST and attach the résumé to a recruiting email only when enabled.
 
 The `POST /api/applications` endpoint validates applicant details and delivers a plain-text email through Resend **only if** all of the following Vercel environment variables are configured:
