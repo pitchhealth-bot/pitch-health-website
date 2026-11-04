@@ -1524,3 +1524,15 @@
   flex-shrink:1;
 }
 .application-resume-heading .application-required-mark{display:inline;color:#9353b4;font-size:inherit;line-height:inherit}
+
+
+/* Explain unsupported résumé uploads right beside the file selector. */
+.application-resume-error {
+  margin: 10px 0 18px;
+  padding: 11px 14px;
+  border: 1px solid #e8b7c0;
+  border-radius: 10px;
+  background: #fff5f6;
+  color: #9c243d;
+  font: 600 13px/1.5 'DM Sans', sans-serif;
+}
