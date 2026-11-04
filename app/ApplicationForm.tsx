@@ -85,19 +85,19 @@ export default function ApplicationForm() {
             <form className="application-form" onSubmit={submit}>
               <div className="application-group-title"><span>01</span> Your information</div>
               <div className="application-form-grid">
-                <label className="application-field">First name <span>*</span>
+                <label className="application-field"><span className="application-label-line">First name <b className="application-required-mark" aria-hidden="true">*</b></span>
                   <input name="firstName" autoComplete="given-name" required maxLength={80} placeholder="First name" />
                 </label>
-                <label className="application-field">Last name <span>*</span>
+                <label className="application-field"><span className="application-label-line">Last name <b className="application-required-mark" aria-hidden="true">*</b></span>
                   <input name="lastName" autoComplete="family-name" required maxLength={80} placeholder="Last name" />
                 </label>
-                <label className="application-field">Email address <span>*</span>
+                <label className="application-field"><span className="application-label-line">Email address <b className="application-required-mark" aria-hidden="true">*</b></span>
                   <input name="email" type="email" autoComplete="email" required maxLength={150} placeholder="you@example.com" />
                 </label>
-                <label className="application-field">Phone number <span>*</span>
+                <label className="application-field"><span className="application-label-line">Phone number <b className="application-required-mark" aria-hidden="true">*</b></span>
                   <input name="phone" type="tel" autoComplete="tel" required maxLength={35} placeholder="(555) 555-5555" />
                 </label>
-                <label className="application-field application-field-wide">Resident state <span>*</span>
+                <label className="application-field application-field-wide"><span className="application-label-line">Resident state <b className="application-required-mark" aria-hidden="true">*</b></span>
                   <select name="state" required defaultValue="" autoComplete="address-level1">
                     <option value="" disabled>Select your state</option>
                     {states.map(([name, code]) => <option key={code} value={code}>{name} - {code}</option>)}
@@ -140,7 +140,7 @@ export default function ApplicationForm() {
                       </div>
                     </fieldset>
                     <label className="application-field application-date-field application-conditional">
-                      Last employment date as an insurance agent <span>*</span>
+                      <span className="application-label-line">Last employment date as an insurance agent <b className="application-required-mark" aria-hidden="true">*</b></span>
                       <input type="date" name="lastEmploymentDate" required max={new Date().toISOString().slice(0,10)} />
                     </label>
                   </>
