@@ -1,3 +1,4 @@
+import SurveyForm from "./SurveyForm";
 import type { Metadata } from "next";
 import Link from "next/link";
 import OfficialLogo from "../OfficialLogo";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: "Complete the Pitch Health Solutions survey.",
 };
 
-const surveyUrl = "https://airtable.com/app4ihGae0XFY7RAD/pagDbB3N19fxL4Ts6/form";
+
 
 export default function SurveyPage() {
   return (
@@ -34,25 +35,12 @@ export default function SurveyPage() {
           <div className="container phs-survey-header-inner">
             <p className="phs-survey-eyebrow">PITCH HEALTH SOLUTIONS</p>
             <h1>We'd love to hear from you.</h1>
-            <p>Complete the survey below. Questions may change depending on your answers.</p>
+            <p>A cleaner survey experience, built for Pitch Health. The questions below demonstrate how conditional follow-ups will work.</p>
           </div>
         </section>
-        <section className="phs-survey-section" aria-label="Survey form">
+        <section className="phs-survey-section" aria-label="Survey preview">
           <div className="container">
-            <div className="phs-survey-embed">
-              <iframe
-                title="Pitch Health Solutions Airtable survey"
-                src={surveyUrl}
-                referrerPolicy="strict-origin-when-cross-origin"
-                loading="eager"
-              />
-            </div>
-            <p className="phs-survey-fallback">
-              Having trouble viewing the survey?{" "}
-              <a href={surveyUrl} target="_blank" rel="noopener noreferrer">
-                Open the original survey in a new tab.
-              </a>
-            </p>
+            <SurveyForm />
           </div>
         </section>
       </main>
