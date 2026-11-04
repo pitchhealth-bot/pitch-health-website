@@ -13,6 +13,8 @@ export default function ApplicationForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [licenseType, setLicenseType] = useState("");
   const [resumeName, setResumeName] = useState("");
+  const [formComplete, setFormComplete] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const submissionIdRef = useRef<string | null>(null);
 
   useEffect(() => {
@@ -29,9 +31,31 @@ export default function ApplicationForm() {
     return () => { active = false; };
   }, []);
 
+  function updateFormComplete() {
+    const form = formRef.current;
+    if (!form) return;
+    const data = new FormData(form);
+    const resume = form.elements.namedItem("resume") as HTMLInputElement | null;
+    const file = resume?.files?.[0];
+    const phone = String(data.get("phone") ?? "").trim();
+    const isValidResume = Boolean(file && file.size > 0 && file.size <= 4 * 1024 * 1024 && /\\.(pdf|doc|docx)$/i.test(file.name));
+    // Native validity covers all required fields and the privacy acknowledgment.
+    // SMS consent is optional. The conditional questions are validated only when shown.
+    setFormComplete(form.checkValidity() &&
+      isValidResume &&
+      /^[+\\d\\s().-]{7,35}$/.test(phone) &&
+      String(data.get("firstName") ?? "").trim().length > 0 &&
+      String(data.get("lastName") ?? "").trim().length > 0);
+  }
+
+  useEffect(() => {
+    // Licensing answers mount/unmount required conditional fields.
+    updateFormComplete();
+  }, [licenseType]);
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!enabled || sendState === "sending") return;
+    if (!enabled || !formComplete || sendState === "sending") return;
     const form = event.currentTarget;
     const values = new FormData(form);
     submissionIdRef.current ??= crypto.randomUUID();
@@ -49,6 +73,7 @@ export default function ApplicationForm() {
       form.reset();
       setLicenseType("");
       setResumeName("");
+      setFormComplete(false);
       submissionIdRef.current = null;
       setSendState("sent");
     } catch (error) {
@@ -86,7 +111,7 @@ export default function ApplicationForm() {
               <button type="button" onClick={() => setSendState("idle")}>Start another application</button>
             </div>
           ) : (
-            <form className="application-form" onSubmit={submit}>
+            <form ref={formRef} className="application-form" onSubmit={submit} onInput={updateFormComplete} onChange={updateFormComplete}>
               <div className="application-group-title"><span>01</span> Your information</div>
               <div className="application-form-grid">
                 <label className="application-field"><span className="application-label-line">First name <b className="application-required-mark" aria-hidden="true">*</b></span>
@@ -176,7 +201,7 @@ export default function ApplicationForm() {
               <div className="application-honeypot" aria-hidden="true"><label>Website <input name="website" tabIndex={-1} autoComplete="off" /></label></div>
               {sendState === "error" && <p className="application-error" role="alert">{errorMessage}</p>}
               {!checking && !enabled && <p className="application-unavailable" role="status">Application submissions are not enabled on this preview yet. To apply now, email <a href="mailto:recruitment@pitchhealthsolutions.com">recruitment@pitchhealthsolutions.com</a>.</p>}
-              <button className="application-submit" type="submit" disabled={!enabled || checking || sendState === "sending"}>
+              <button className="application-submit" type="submit" disabled={!enabled || checking || !formComplete || sendState === "sending"}>
                 {checking ? "Checking availability…" : sendState === "sending" ? "Sending application…" : "Submit application"}
               </button>
               <p className="application-fineprint">Please do not include Social Security numbers, Medicare IDs, or other sensitive personal information.</p>
