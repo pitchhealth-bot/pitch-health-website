@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 
 type SendState = "idle" | "sending" | "sent" | "error";
@@ -13,6 +13,7 @@ export default function ApplicationForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [licenseType, setLicenseType] = useState("");
   const [resumeName, setResumeName] = useState("");
+  const submissionIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -33,6 +34,8 @@ export default function ApplicationForm() {
     if (!enabled || sendState === "sending") return;
     const form = event.currentTarget;
     const values = new FormData(form);
+    submissionIdRef.current ??= crypto.randomUUID();
+    values.set("submissionId", submissionIdRef.current);
     setSendState("sending");
     setErrorMessage("");
 
@@ -46,6 +49,7 @@ export default function ApplicationForm() {
       form.reset();
       setLicenseType("");
       setResumeName("");
+      submissionIdRef.current = null;
       setSendState("sent");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "We could not send your application.");
