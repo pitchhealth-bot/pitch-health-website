@@ -13,6 +13,7 @@ export default function ApplicationForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [licenseType, setLicenseType] = useState("");
   const [resumeName, setResumeName] = useState("");
+  const [resumeError, setResumeError] = useState("");
   const [formComplete, setFormComplete] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const submissionIdRef = useRef<string | null>(null);
@@ -73,6 +74,7 @@ export default function ApplicationForm() {
       form.reset();
       setLicenseType("");
       setResumeName("");
+      setResumeError("");
       setFormComplete(false);
       submissionIdRef.current = null;
       setSendState("sent");
@@ -179,8 +181,22 @@ export default function ApplicationForm() {
               <label className="application-upload">
                 <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required onChange={event => {
                   const file = event.target.files?.[0];
-                  if (file && file.size > 4 * 1024 * 1024) { event.target.value = ""; setResumeName(""); setErrorMessage("Please upload a résumé smaller than 4 MB."); setSendState("error"); return; }
+                  if (file && !/\\.(pdf|doc|docx)$/i.test(file.name)) {
+                    event.target.value = "";
+                    setResumeName("");
+                    setResumeError("Unsupported file type. Please upload a PDF, DOC, or DOCX résumé. Images and screenshots are not accepted.");
+                    setFormComplete(false);
+                    return;
+                  }
+                  if (file && (file.size === 0 || file.size > 4 * 1024 * 1024)) {
+                    event.target.value = "";
+                    setResumeName("");
+                    setResumeError("Your résumé must be a non-empty file smaller than 4 MB.");
+                    setFormComplete(false);
+                    return;
+                  }
                   setResumeName(file?.name ?? "");
+                  setResumeError("");
                   setErrorMessage("");
                   setSendState("idle");
                 }} />
@@ -188,6 +204,7 @@ export default function ApplicationForm() {
                 <strong>{resumeName || "Choose a résumé file"}</strong>
                 <small>PDF, DOC or DOCX · Maximum 4 MB · Required</small>
               </label>
+              {resumeError && <p className="application-resume-error" role="alert">{resumeError}</p>}
               <div className="application-consent">
                 <label className="application-checkbox">
                   <input name="privacyAcknowledged" type="checkbox" value="yes" required />
