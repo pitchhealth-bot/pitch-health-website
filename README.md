@@ -14,7 +14,7 @@ The new /apply page includes a redesigned, responsive application form. The orig
 
 The server mapping now targets **Recruiting Pipeline** (base `appHdrREosaz1BUMv`), table **Website Applicants** (`tblxsRT8YnsNUa9jm`) using its verified field IDs. Values stored: full name, first/last name, email, phone, resident state, 18+ answer, license type, relevant conditional license answer, last employment date when applicable, privacy acknowledgement, SMS consent and a stable submission ID. Conditional fields that do not apply are omitted.
 
-A required résumé is uploaded directly into an Airtable attachment field using the direct attachment API, after upserting the applicant record by submission ID. The source table **does not yet have a résumé field**, so it must be added and reviewed before enabling the endpoint. The Airtable field ID must then be placed into the Vercel environment; no résumé or application is currently transmitted.
+A required résumé is uploaded directly into Airtable using the direct attachment API, after upserting the applicant record by submission ID. **Resume** was confirmed as a `multipleAttachments` field on Website Applicants (`fld1V5oAzbAa8YMIt`). `AIRTABLE_RESUME_FIELD_ID` is now configured in Vercel for production and preview. Live intake is still disabled because an Airtable API token and explicit approval flag are not configured; no résumé or application is currently transmitted.
 
 Required Vercel environment variables (Production, not `.env` committed to GitHub):
 - `AIRTABLE_API_TOKEN`: a least-privilege Airtable personal access token scoped to this base, with `data.records:read` and `data.records:write`.
@@ -27,7 +27,7 @@ The Airtable table's `Email delivery status` field currently records `Not sent (
 
 Before enabling publicly:
 - Confirm the destination table's columns, exact select values and whether any additional fields are needed.
-- Create the résumé attachment field with appropriate Airtable access permissions.
+- Confirm résumé attachment access permissions and privacy/retention policy.
 - Approve the privacy notice, sensitive-file retention and who may access candidate data.
 - Test creating one test record, attachments, mobile experience, conditional validation and retry behavior; remove test data only after approval.
 - Add server-side rate limiting/spam prevention and operational monitoring.
