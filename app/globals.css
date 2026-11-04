@@ -1508,3 +1508,19 @@
 .phs-survey-source-link{display:inline-flex;min-height:53px;min-width:210px;align-items:center;justify-content:center;padding:15px 24px;background:#5c217f;color:#fff;border-radius:10px;font-weight:700}
 .phs-survey-source-link:hover{background:#7634a0}
 .phs-survey-source-card .phs-survey-source-note{margin:24px auto 0;font-size:12px;color:#83778c}
+
+
+/* Keep résumé required mark next to the section title, not in a separate badge. */
+.application-group-title > .application-resume-heading{
+  display:inline;
+  width:auto;
+  height:auto;
+  background:transparent;
+  color:inherit;
+  border-radius:0;
+  font-size:inherit;
+  font-weight:inherit;
+  line-height:inherit;
+  flex-shrink:1;
+}
+.application-resume-heading .application-required-mark{display:inline;color:#9353b4;font-size:inherit;line-height:inherit}
