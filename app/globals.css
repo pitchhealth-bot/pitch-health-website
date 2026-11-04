@@ -1403,3 +1403,8 @@
 .application-date-field .application-label-line{width:100%}
 .application-date-field input{width:min(100%,320px)}
 .application-questions{gap:26px}
+
+/* Slightly smaller official logo in navigation; maintain original aspect ratio. */
+@media(min-width:761px){.site-header .brand{width:255px;max-width:32vw}}
+@media(min-width:381px) and (max-width:760px){.site-header .brand{width:165px}}
+@media(max-width:380px){.site-header .brand{width:143px}}
