@@ -4,12 +4,15 @@ import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 
 type SendState = "idle" | "sending" | "sent" | "error";
+const states: [string,string][] = [["Alabama","AL"],["Alaska","AK"],["Arizona","AZ"],["Arkansas","AR"],["California","CA"],["Colorado","CO"],["Connecticut","CT"],["Delaware","DE"],["Florida","FL"],["Georgia","GA"],["Hawaii","HI"],["Idaho","ID"],["Illinois","IL"],["Indiana","IN"],["Iowa","IA"],["Kansas","KS"],["Kentucky","KY"],["Louisiana","LA"],["Maine","ME"],["Maryland","MD"],["Massachusetts","MA"],["Michigan","MI"],["Minnesota","MN"],["Mississippi","MS"],["Missouri","MO"],["Montana","MT"],["Nebraska","NE"],["Nevada","NV"],["New Hampshire","NH"],["New Jersey","NJ"],["New Mexico","NM"],["New York","NY"],["North Carolina","NC"],["North Dakota","ND"],["Ohio","OH"],["Oklahoma","OK"],["Oregon","OR"],["Pennsylvania","PA"],["Rhode Island","RI"],["South Carolina","SC"],["South Dakota","SD"],["Tennessee","TN"],["Texas","TX"],["Utah","UT"],["Vermont","VT"],["Virginia","VA"],["Washington","WA"],["West Virginia","WV"],["Wisconsin","WI"],["Wyoming","WY"],["District of Columbia","DC"]];
 
 export default function ApplicationForm() {
   const [enabled, setEnabled] = useState(false);
   const [checking, setChecking] = useState(true);
   const [sendState, setSendState] = useState<SendState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [licenseType, setLicenseType] = useState("");
+  const [resumeName, setResumeName] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -29,19 +32,20 @@ export default function ApplicationForm() {
     event.preventDefault();
     if (!enabled || sendState === "sending") return;
     const form = event.currentTarget;
-    const values = Object.fromEntries(new FormData(form).entries());
+    const values = new FormData(form);
     setSendState("sending");
     setErrorMessage("");
 
     try {
       const response = await fetch("/api/applications", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: values,
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || "We could not send your application. Please try again.");
       form.reset();
+      setLicenseType("");
+      setResumeName("");
       setSendState("sent");
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : "We could not send your application.");
@@ -93,35 +97,68 @@ export default function ApplicationForm() {
                 <label className="application-field">Phone number <span>*</span>
                   <input name="phone" type="tel" autoComplete="tel" required maxLength={35} placeholder="(555) 555-5555" />
                 </label>
-                <label className="application-field application-field-wide">State of residence <span>*</span>
-                  <input name="state" autoComplete="address-level1" required maxLength={60} placeholder="e.g. Florida" />
+                <label className="application-field application-field-wide">Resident state <span>*</span>
+                  <select name="state" required defaultValue="" autoComplete="address-level1">
+                    <option value="" disabled>Select your state</option>
+                    {states.map(([name, code]) => <option key={code} value={code}>{name} - {code}</option>)}
+                  </select>
                 </label>
               </div>
 
-              <div className="application-group-title"><span>02</span> Your background</div>
-              <div className="application-form-grid">
-                <label className="application-field">Insurance license status <span>*</span>
-                  <select name="licenseStatus" required defaultValue="">
-                    <option value="" disabled>Select an option</option>
-                    <option value="Licensed">Currently licensed</option>
-                    <option value="In progress">License in progress</option>
-                    <option value="Not licensed">Not yet licensed</option>
-                  </select>
-                </label>
-                <label className="application-field">Insurance or sales experience <span>*</span>
-                  <select name="experience" required defaultValue="">
-                    <option value="" disabled>Select an option</option>
-                    <option value="New to sales">New to sales</option>
-                    <option value="Less than 1 year">Less than 1 year</option>
-                    <option value="1–3 years">1–3 years</option>
-                    <option value="3+ years">3+ years</option>
-                  </select>
-                </label>
-                <label className="application-field application-field-wide">Tell us a little about your background <span className="application-optional">(optional)</span>
-                  <textarea name="notes" rows={4} maxLength={1800} placeholder="Relevant experience, what interests you about the role, or anything you'd like the team to know." />
-                </label>
+              <div className="application-group-title"><span>02</span> Licensing &amp; eligibility</div>
+              <div className="application-questions">
+                <fieldset className="application-radio-field">
+                  <legend>Are you 18 years of age or older? <span>*</span></legend>
+                  <div className="application-radio-options">
+                    <label><input type="radio" name="adult" value="Yes" required /> Yes</label>
+                    <label><input type="radio" name="adult" value="No" required /> No</label>
+                  </div>
+                </fieldset>
+                <fieldset className="application-radio-field">
+                  <legend>Are you licensed in: <span>*</span></legend>
+                  <div className="application-radio-options">
+                    {["Health", "Life", "Both health and life", "Not licensed"].map(value => (
+                      <label key={value}><input type="radio" name="licenseType" value={value} required checked={licenseType === value} onChange={() => setLicenseType(value)} /> {value}</label>
+                    ))}
+                  </div>
+                </fieldset>
+                {licenseType === "Not licensed" ? (
+                  <fieldset className="application-radio-field application-conditional">
+                    <legend>Are you willing to get licensed within 2 weeks? <span>*</span></legend>
+                    <div className="application-radio-options">
+                      <label><input type="radio" name="willingToLicense" value="Yes" required /> Yes</label>
+                      <label><input type="radio" name="willingToLicense" value="No" required /> No</label>
+                    </div>
+                  </fieldset>
+                ) : licenseType ? (
+                  <>
+                    <fieldset className="application-radio-field application-conditional">
+                      <legend>Do you need releases from the carriers? <span>*</span></legend>
+                      <div className="application-radio-options">
+                        <label><input type="radio" name="needsReleases" value="Yes" required /> Yes</label>
+                        <label><input type="radio" name="needsReleases" value="No" required /> No</label>
+                      </div>
+                    </fieldset>
+                    <label className="application-field application-date-field application-conditional">
+                      Last employment date as an insurance agent <span>*</span>
+                      <input type="date" name="lastEmploymentDate" required max={new Date().toISOString().slice(0,10)} />
+                    </label>
+                  </>
+                ) : null}
               </div>
-
+              <div className="application-group-title"><span>03</span> Your résumé</div>
+              <label className="application-upload">
+                <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required onChange={event => {
+                  const file = event.target.files?.[0];
+                  if (file && file.size > 4 * 1024 * 1024) { event.target.value = ""; setResumeName(""); setErrorMessage("Please upload a résumé smaller than 4 MB."); setSendState("error"); return; }
+                  setResumeName(file?.name ?? "");
+                  setErrorMessage("");
+                  setSendState("idle");
+                }} />
+                <span className="application-upload-symbol" aria-hidden="true">+</span>
+                <strong>{resumeName || "Choose a résumé file"}</strong>
+                <small>PDF, DOC or DOCX · Maximum 4 MB · Required</small>
+              </label>
               <div className="application-consent">
                 <label className="application-checkbox">
                   <input name="privacyAcknowledged" type="checkbox" value="yes" required />
