@@ -1325,3 +1325,44 @@
 .application-success button{margin-top:16px;border-radius:8px;border:0;background:#592080;color:#fff;padding:14px 22px;cursor:pointer}
 @media(max-width:900px){.application-layout{grid-template-columns:1fr;gap:30px}.application-intro{position:static;padding-top:0;max-width:660px}.application-intro h2{max-width:500px}.application-intro>p{max-width:640px}.application-side-note{margin-top:18px}}
 @media(max-width:600px){.application-shell{padding:38px 0 65px}.application-panel{padding:23px 18px;border-radius:13px}.application-panel-header{flex-direction:column;align-items:start;gap:9px;margin-bottom:24px;padding-bottom:22px}.application-form-grid{grid-template-columns:1fr;gap:17px}.application-field-wide{grid-column:auto}.application-intro h2{font-size:33px}.application-panel-header h2{font-size:25px}.application-group-title{margin-top:28px}.application-side-note{margin-top:24px}.application-checkbox{font-size:12px}}
+
+
+/* Original application question branching, styled for modern PHS form. */
+.application-questions{display:grid;gap:25px}
+.application-radio-field{margin:0;padding:0;border:0;min-width:0}
+.application-radio-field legend{padding:0;font:600 14px/1.55 'DM Sans',sans-serif;color:#30233e;margin-bottom:12px}
+.application-radio-field legend span{color:#9353b4}
+.application-radio-options{display:flex;flex-wrap:wrap;gap:11px}
+.application-radio-options label{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid #e0d7e8;border-radius:10px;
+  background:#fff;padding:12px 16px;
+  min-height:45px;cursor:pointer;
+  color:#4b3d58;font-size:14px;font-weight:600;
+  transition:background .15s,border-color .15s;
+}
+.application-radio-options label:has(input:checked){
+  border-color:#8d49bc;background:#f2e8f9;color:#4c196f;
+}
+.application-radio-options label:focus-within{outline:2px solid #8d49bc;outline-offset:2px}
+.application-radio-options input{width:17px;height:17px;accent-color:#713297;margin:0}
+.application-conditional{padding:17px 18px;border-radius:12px;background:#faf7fd;border:1px solid #eadff0}
+.application-date-field input{max-width:320px;background:white}
+.application-upload{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:8px;min-height:168px;
+  border:2px dashed #cdb9dd;background:#faf7fd;
+  border-radius:13px;padding:20px;position:relative;cursor:pointer;
+  transition:border-color .18s,background .18s;
+}
+.application-upload:hover,.application-upload:focus-within{border-color:#8d49bc;background:#f2e9f9}
+.application-upload input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.application-upload-symbol{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#e9d8f4;color:#652c89;font-size:28px;font-weight:400;line-height:1}
+.application-upload strong{font:600 14px/1.5 'DM Sans',sans-serif;color:#3c2850;overflow-wrap:anywhere}
+.application-upload small{font:400 12px/1.5 'DM Sans',sans-serif;color:#817387}
+@media(max-width:600px){
+  .application-radio-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .application-radio-options label{padding:11px 12px;font-size:13px}
+  .application-conditional{padding:15px}
+  .application-date-field input{max-width:100%}
+}
