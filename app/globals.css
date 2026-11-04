@@ -1499,3 +1499,12 @@
 .phs-native-survey-review dd{margin:0;color:#34263e;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-width:650px){.phs-native-survey{padding:23px 18px;margin-top:-24px;border-radius:14px}.phs-native-survey-preview{font-size:11px}.phs-native-survey-fields{grid-template-columns:1fr}.phs-native-survey-branch{padding:18px 14px}.phs-native-survey-review dl div{grid-template-columns:1fr;gap:4px}.phs-native-survey-actions{justify-content:stretch}.phs-native-survey-next,.phs-native-survey-back{flex:1;padding:12px 14px}}
 @media(prefers-reduced-motion:reduce){.phs-native-survey-progress span,.phs-native-survey-choices label{transition:none}}
+
+
+/* Verified-source survey handoff; no unverified or invented questions displayed. */
+.phs-survey-source-card{position:relative;max-width:750px;margin:-28px auto 0;border:1px solid #eadfec;background:#fff;border-radius:18px;box-shadow:0 18px 55px rgba(43,16,65,.08);padding:clamp(30px,5vw,58px);text-align:center}
+.phs-survey-source-card h2{font:600 clamp(29px,3vw,38px)/1.2 'Poppins',sans-serif;letter-spacing:-.045em;color:#281934;margin:0 0 18px}
+.phs-survey-source-card p{font:400 15px/1.8 'DM Sans',sans-serif;color:#615669;max-width:540px;margin:0 auto 26px}
+.phs-survey-source-link{display:inline-flex;min-height:53px;min-width:210px;align-items:center;justify-content:center;padding:15px 24px;background:#5c217f;color:#fff;border-radius:10px;font-weight:700}
+.phs-survey-source-link:hover{background:#7634a0}
+.phs-survey-source-card .phs-survey-source-note{margin:24px auto 0;font-size:12px;color:#83778c}
