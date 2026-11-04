@@ -108,8 +108,14 @@ export async function saveApplicantToAirtable(application: ApplicantIntake): Pro
     throw new Error("We could not confirm the application record. Please try again.");
   }
 
-  // Do not upload a second copy on form retry if the original was already stored.
-  const uploaded = data.records?.[0]?.fields?.[resumeField];
+  // Fetch by field ID to avoid uploading duplicate résumés on a retry.
+  const existing = await fetch(
+    `${RECORDS_URL}/${recordId}?returnFieldsByFieldId=true`,
+    { headers: headers(), cache: "no-store" }
+  );
+  await assertOK(existing, "verify existing résumé");
+  const existingData = await existing.json() as { fields?: Record<string, unknown> };
+  const uploaded = existingData.fields?.[resumeField];
   if (!Array.isArray(uploaded) || uploaded.length === 0) {
     const upload = await fetch(
       `https://content.airtable.com/v0/${BASE_ID}/${recordId}/${resumeField}/uploadAttachment`,
@@ -131,7 +137,7 @@ export async function saveApplicantToAirtable(application: ApplicantIntake): Pro
     method: "PATCH",
     headers: headers(),
     cache: "no-store",
-    body: JSON.stringify({ fields: { [FIELD.emailStatus]: "Application and résumé saved" } }),
+    body: JSON.stringify({ fields: { [FIELD.emailStatus]: "Not sent (Airtable intake only)" } }),
   });
   if (!status.ok) console.error("Airtable status field update failed", status.status);
   return { recordId };
