@@ -1433,3 +1433,19 @@
 @media(max-width:600px){
   .application-questions .application-conditional-question{padding:18px 16px}
 }
+
+
+/* Clean Pitch Health survey wrapper around the source Airtable form.
+   Airtable owns all question visibility, logic and response delivery. */
+.phs-survey-page{background:#f7f4fa;min-height:900px}
+.phs-survey-header{background:#391950;color:#fff;padding:67px 0 78px}
+.phs-survey-header-inner{max-width:1180px}
+.phs-survey-eyebrow{font:700 11px/1.5 'DM Sans',sans-serif;letter-spacing:.16em;color:#edc2f1;margin:0 0 20px}
+.phs-survey-header h1{font:600 clamp(37px,4vw,62px)/1.14 'Poppins',sans-serif;letter-spacing:-.055em;margin:0 0 13px;max-width:920px}
+.phs-survey-header p:last-child{color:#eaddec;font:400 16px/1.75 'DM Sans',sans-serif;max-width:650px;margin:0}
+.phs-survey-section{padding:0 0 75px}
+.phs-survey-embed{margin:-34px auto 0;position:relative;z-index:1;background:#fff;border:1px solid #ebe2f1;border-radius:18px;overflow:hidden;box-shadow:0 20px 70px rgba(40,13,65,.08);max-width:1050px}
+.phs-survey-embed iframe{display:block;width:100%;height:1100px;min-height:75vh;border:0;background:#fff}
+.phs-survey-fallback{text-align:center;font:400 13px/1.7 'DM Sans',sans-serif;color:#6f627a;margin:24px 0 0}
+.phs-survey-fallback a{color:#5d207e;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.phs-survey-header{padding:43px 0 58px}.phs-survey-header h1{font-size:clamp(30px,8vw,43px)}.phs-survey-section{padding-bottom:50px}.phs-survey-embed{border-radius:12px;margin-top:-22px}.phs-survey-embed iframe{height:1150px}.phs-survey-header p:last-child{font-size:14px}}
