@@ -1408,3 +1408,28 @@
 @media(min-width:761px){.site-header .brand{width:255px;max-width:32vw}}
 @media(min-width:381px) and (max-width:760px){.site-header .brand{width:165px}}
 @media(max-width:380px){.site-header .brand{width:143px}}
+
+
+/* Conditional licensing questions: headings sit INSIDE the card, not on its border. */
+.application-questions .application-conditional-question{
+  display:block;
+  background:#faf7fd;
+  border:1px solid #eadff0;
+  border-radius:12px;
+  padding:20px 22px 22px;
+  min-width:0;
+}
+.application-conditional-question .application-conditional-title{
+  display:block;
+  padding:0;
+  margin:0 0 16px;
+  font:600 14px/1.5 'DM Sans',sans-serif;
+  color:#30233e;
+}
+.application-conditional-question .application-conditional-title span{
+  color:#9353b4;
+  display:inline;
+}
+@media(max-width:600px){
+  .application-questions .application-conditional-question{padding:18px 16px}
+}
