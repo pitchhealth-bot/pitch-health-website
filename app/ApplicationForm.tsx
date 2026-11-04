@@ -123,22 +123,22 @@ export default function ApplicationForm() {
                   </div>
                 </fieldset>
                 {licenseType === "Not licensed" ? (
-                  <fieldset className="application-radio-field application-conditional">
-                    <legend>Are you willing to get licensed within 2 weeks? <span>*</span></legend>
+                  <div className="application-conditional application-conditional-question" role="group" aria-labelledby="application-question-willing">
+                    <p className="application-conditional-title" id="application-question-willing">Are you willing to get licensed within 2 weeks? <span>*</span></p>
                     <div className="application-radio-options">
                       <label><input type="radio" name="willingToLicense" value="Yes" required /> Yes</label>
                       <label><input type="radio" name="willingToLicense" value="No" required /> No</label>
                     </div>
-                  </fieldset>
+                  </div>
                 ) : licenseType ? (
                   <>
-                    <fieldset className="application-radio-field application-conditional">
-                      <legend>Do you need releases from the carriers? <span>*</span></legend>
+                    <div className="application-conditional application-conditional-question" role="group" aria-labelledby="application-question-releases">
+                      <p className="application-conditional-title" id="application-question-releases">Do you need releases from the carriers? <span>*</span></p>
                       <div className="application-radio-options">
                         <label><input type="radio" name="needsReleases" value="Yes" required /> Yes</label>
                         <label><input type="radio" name="needsReleases" value="No" required /> No</label>
                       </div>
-                    </fieldset>
+                    </div>
                     <label className="application-field application-date-field application-conditional">
                       <span className="application-label-line">Last employment date as an insurance agent <b className="application-required-mark" aria-hidden="true">*</b></span>
                       <input type="date" name="lastEmploymentDate" required max={new Date().toISOString().slice(0,10)} />
