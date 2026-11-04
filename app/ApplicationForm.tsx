@@ -150,7 +150,7 @@ export default function ApplicationForm() {
                   </>
                 ) : null}
               </div>
-              <div className="application-group-title"><span>03</span> Your résumé</div>
+              <div className="application-group-title"><span>03</span><span className="application-resume-heading">Your résumé <b className="application-required-mark" aria-hidden="true">*</b></span></div>
               <label className="application-upload">
                 <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required onChange={event => {
                   const file = event.target.files?.[0];
