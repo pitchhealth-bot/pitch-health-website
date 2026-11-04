@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:applications": "tsc app/api/applications/route.ts app/api/applications/airtable.ts --outDir .test-build --module commonjs --moduleResolution node --target ES2022 --esModuleInterop --skipLibCheck --strict && node --test tests/applications.cjs"
   },
   "dependencies": {
     "next": "^15.5.0",

@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
+import { airtableConfigured, markEmailSent, saveApplication } from "./airtable";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const configured = () => (
   process.env.APPLICATION_INTAKE_ENABLED === "true" &&
+  airtableConfigured() &&
   Boolean(process.env.RESEND_API_KEY && process.env.APPLICATION_FROM_EMAIL && process.env.APPLICATION_TO_EMAIL)
 );
 
@@ -56,6 +58,7 @@ export async function POST(request: Request) {
   const validUnlicensed = licenseType === "Not licensed" && ["Yes", "No"].includes(willingToLicense);
   const lastDateValid = /^\d{4}-\d{2}-\d{2}$/.test(lastEmploymentDate) &&
     Number.isFinite(new Date(lastEmploymentDate + "T00:00:00Z").valueOf()) &&
+    new Date(lastEmploymentDate + "T00:00:00Z").toISOString().slice(0, 10) === lastEmploymentDate &&
     lastEmploymentDate <= new Date().toISOString().slice(0, 10);
 
   if (
@@ -96,12 +99,29 @@ export async function POST(request: Request) {
   ].join("\n");
 
   try {
+    const fields = {
+      Name: firstName + " " + lastName,
+      "First name": firstName, "Last name": lastName,
+      "Email address": email, "Phone number": phone, "Resident state": state,
+      "18 or older": adult, "License type": licenseType,
+      ...(validLicensed ? {
+        "Needs carrier releases": needsReleases,
+        "Last employment date as an insurance agent": lastEmploymentDate,
+      } : { "Willing to get licensed within 2 weeks": willingToLicense }),
+      "Privacy policy acknowledged": "Yes",
+      "Recruiting SMS consent": smsConsent ? "Yes" : "No",
+    } as Record<string, string>;
+    const saved = await saveApplication(fields, fileName, binary,
+      isPdf ? "application/pdf" : isDoc ? "application/msword" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+    if (saved.emailSent) return NextResponse.json({ ok: true });
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + process.env.RESEND_API_KEY,
         "Content-Type": "application/json",
+        "Idempotency-Key": "application-" + saved.key,
       },
+      signal: AbortSignal.timeout(15000),
       body: JSON.stringify({
         from: process.env.APPLICATION_FROM_EMAIL,
         to: [process.env.APPLICATION_TO_EMAIL],
@@ -115,6 +135,9 @@ export async function POST(request: Request) {
       console.error("Application mail send failed", response.status);
       return NextResponse.json({ error: "The application could not be delivered. Please contact our recruiting team." }, { status: 502 });
     }
+    // If this update fails, return an error; a retry reuses the stored résumé and
+    // Resend's idempotency key instead of silently dropping the recruiting email.
+    await markEmailSent(saved.id);
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "The application could not be delivered. Please contact our recruiting team." }, { status: 502 });
