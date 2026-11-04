@@ -1,12 +1,10 @@
+import { airtableIntakeConfigured, saveApplicantToAirtable } from "../../lib/airtable-recruitment";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const configured = () => (
-  process.env.APPLICATION_INTAKE_ENABLED === "true" &&
-  Boolean(process.env.RESEND_API_KEY && process.env.APPLICATION_FROM_EMAIL && process.env.APPLICATION_TO_EMAIL)
-);
+const configured = airtableIntakeConfigured;
 
 const states = new Set("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC".split(" "));
 const clean = (value: FormDataEntryValue | null, max = 200) =>
@@ -50,6 +48,7 @@ export async function POST(request: Request) {
   const willingToLicense = clean(form.get("willingToLicense"), 3);
   const lastEmploymentDate = clean(form.get("lastEmploymentDate"), 10);
   const smsConsent = clean(form.get("smsConsent")) === "yes";
+  const submissionId = clean(form.get("submissionId"), 48);
   const file = form.get("resume");
 
   const validLicensed = ["Health", "Life", "Both health and life"].includes(licenseType);
@@ -65,7 +64,8 @@ export async function POST(request: Request) {
     !["Yes", "No"].includes(adult) ||
     !(validLicensed || validUnlicensed) ||
     (validLicensed && (!["Yes", "No"].includes(needsReleases) || !lastDateValid)) ||
-    clean(form.get("privacyAcknowledged")) !== "yes"
+    clean(form.get("privacyAcknowledged")) !== "yes" ||
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(submissionId)
   ) {
     return NextResponse.json({ error: "Please complete all required questions." }, { status: 400 });
   }
@@ -82,41 +82,33 @@ export async function POST(request: Request) {
   if (!isPdf && !isDocx && !isDoc)
     return NextResponse.json({ error: "Please upload a PDF, DOC, or DOCX résumé." }, { status: 400 });
 
-  const detail = [
-    "New Pitch Health Solutions insurance agent application", "",
-    "Name: " + firstName + " " + lastName,
-    "Email: " + email, "Phone: " + phone, "Resident state: " + state,
-    "Age 18 or older: " + adult,
-    "Licensed in: " + licenseType,
-    validLicensed ? "Needs releases from carriers: " + needsReleases : "Willing to get licensed within 2 weeks: " + willingToLicense,
-    ...(validLicensed ? ["Last employment date as insurance agent: " + lastEmploymentDate] : []),
-    "Résumé attached: " + fileName,
-    "Privacy acknowledgement: YES",
-    "Optional recruiting SMS consent: " + (smsConsent ? "YES" : "NO"),
-  ].join("\n");
-
   try {
-    const response = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + process.env.RESEND_API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: process.env.APPLICATION_FROM_EMAIL,
-        to: [process.env.APPLICATION_TO_EMAIL],
-        reply_to: email,
-        subject: "New insurance agent application: " + firstName + " " + lastName,
-        text: detail,
-        attachments: [{ filename: fileName, content: binary.toString("base64") }],
+    await saveApplicantToAirtable({
+      firstName, lastName, email, phone, state,
+      adult: adult as "Yes" | "No",
+      licenseType: licenseType as "Health" | "Life" | "Both health and life" | "Not licensed",
+      ...(validLicensed ? {
+        needsReleases: needsReleases as "Yes" | "No",
+        lastEmploymentDate,
+      } : {
+        willingToLicense: willingToLicense as "Yes" | "No",
       }),
+      smsConsent, submissionId,
+      resume: {
+        filename: fileName,
+        contentType: isPdf
+          ? "application/pdf"
+          : isDocx
+          ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          : "application/msword",
+        bytes: binary,
+      },
     });
-    if (!response.ok) {
-      console.error("Application mail send failed", response.status);
-      return NextResponse.json({ error: "The application could not be delivered. Please contact our recruiting team." }, { status: 502 });
-    }
     return NextResponse.json({ ok: true });
   } catch {
-    return NextResponse.json({ error: "The application could not be delivered. Please contact our recruiting team." }, { status: 502 });
+    return NextResponse.json(
+      { error: "We could not save your application. Please try again or contact the recruiting team." },
+      { status: 502 }
+    );
   }
 }
