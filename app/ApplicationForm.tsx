@@ -38,12 +38,12 @@ export default function ApplicationForm() {
     const resume = form.elements.namedItem("resume") as HTMLInputElement | null;
     const file = resume?.files?.[0];
     const phone = String(data.get("phone") ?? "").trim();
-    const isValidResume = Boolean(file && file.size > 0 && file.size <= 4 * 1024 * 1024 && /\\.(pdf|doc|docx)$/i.test(file.name));
+    const isValidResume = Boolean(file && file.size > 0 && file.size <= 4 * 1024 * 1024 && /\.(pdf|doc|docx)$/i.test(file.name));
     // Native validity covers all required fields and the privacy acknowledgment.
     // SMS consent is optional. The conditional questions are validated only when shown.
     setFormComplete(form.checkValidity() &&
       isValidResume &&
-      /^[+\\d\\s().-]{7,35}$/.test(phone) &&
+      /^[+\d\s().-]{7,35}$/.test(phone) &&
       String(data.get("firstName") ?? "").trim().length > 0 &&
       String(data.get("lastName") ?? "").trim().length > 0);
   }
