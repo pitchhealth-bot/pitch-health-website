@@ -1366,3 +1366,40 @@
   .application-conditional{padding:15px}
   .application-date-field input{max-width:100%}
 }
+
+
+/* Application form field alignment: keep every required star beside its label. */
+.application-field .application-label-line{
+  display:inline-flex!important;
+  flex-direction:row;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:5px;
+  width:fit-content;
+  max-width:100%;
+  color:#30233e!important;
+  font:600 14px/1.5 'DM Sans',sans-serif;
+}
+.application-required-mark{
+  display:inline;
+  color:#9353b4;
+  font-weight:700;
+  line-height:inherit;
+}
+.application-radio-field legend{display:table;width:auto;max-width:100%;margin:0 0 12px;padding:0;font-size:14px;line-height:1.5}
+.application-radio-field legend span{display:inline;color:#9353b4}
+.application-radio-field.application-conditional{
+  border:0;
+  padding:0;
+  background:transparent;
+  border-radius:0;
+}
+.application-date-field.application-conditional{
+  border:0;
+  padding:0;
+  background:transparent;
+  border-radius:0;
+}
+.application-date-field .application-label-line{width:100%}
+.application-date-field input{width:min(100%,320px)}
+.application-questions{gap:26px}
