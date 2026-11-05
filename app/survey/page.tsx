@@ -19,6 +19,7 @@ export default function SurveyPage() {
         <nav aria-label="Primary navigation">
           <Link href="/#why-us">About us</Link>
           <Link href="/career">Careers</Link>
+          <Link href="/survey" aria-current="page">Customer Survey</Link>
           <Link href="/#contact">Contact</Link>
         </nav>
         <div className="header-actions">
