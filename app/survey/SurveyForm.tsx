@@ -1,160 +1,59 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { fields, MODE_ID, QUICK, DETAILED, visible, pruneAnswers, validateAnswers, type SurveyAnswers, type SurveyField } from "./survey-schema";
+const originalSurvey = "https://airtable.com/app4ihGae0XFY7RAD/pagDbB3N19fxL4Ts6/form";
 
-/**
- * DESIGN PREVIEW ONLY.
- * The live Airtable survey's question schema and conditional rules were not accessible.
- * Replace these provisional items with confirmed source content before enabling submissions.
- */
-type Topic = "feedback" | "question" | "callback";
-type Answers = {
-  name: string;
-  email: string;
-  topic: Topic | "";
-  rating: string;
-  message: string;
-  phone: string;
-};
-
-const initial: Answers = {
-  name: "", email: "", topic: "", rating: "", message: "", phone: ""
-};
-
-const topicOptions: { value: Topic; label: string; description: string }[] = [
-  { value: "feedback", label: "Share feedback", description: "Tell us about your experience" },
-  { value: "question", label: "Ask a question", description: "Share something you'd like answered" },
-  { value: "callback", label: "Request a callback", description: "Leave a number we can contact" },
-];
+function Question({ field, value, update }: { field: SurveyField; value?: string | string[]; update: (value: string | string[]) => void }) {
+  const label = field.label + (field.isRequired ? " *" : "");
+  if (field.options) return <fieldset className="customer-question"><legend>{label}</legend><div className="customer-options">{field.options.choices.map(choice => {
+    const multi = field.fieldType === "multipleSelects";
+    const selected = multi ? Array.isArray(value) && value.includes(choice.name) : value === choice.name;
+    return <label key={choice.id} className={selected ? "is-selected" : ""}><input type={multi ? "checkbox" : "radio"} name={field.fieldId} value={choice.name} checked={selected} required={!multi && field.isRequired} onChange={event => update(multi ? event.target.checked ? [...(Array.isArray(value) ? value : []), choice.name] : (Array.isArray(value) ? value : []).filter(item => item !== choice.name) : choice.name)} /><span>{choice.name}</span></label>;
+  })}</div>{value && !field.isRequired && <button className="customer-clear" type="button" onClick={() => update("")} aria-label={`Clear answer: ${field.label}`}>Clear selection</button>}</fieldset>;
+  return <label className="customer-comments customer-question" htmlFor={field.fieldId}>{label}{field.fieldType === "multilineText" ? <textarea id={field.fieldId} rows={4} maxLength={3000} value={String(value || "")} required={field.isRequired} onChange={event => update(event.target.value)} /> : <input id={field.fieldId} type={field.fieldType === "email" ? "email" : field.fieldType === "phoneNumber" ? "tel" : "text"} autoComplete={field.label === "Full Name" ? "name" : field.fieldType === "email" ? "email" : field.fieldType === "phoneNumber" ? "tel" : "off"} maxLength={field.fieldType === "phoneNumber" ? 35 : 250} value={String(value || "")} required={field.isRequired} onChange={event => update(event.target.value)} />}</label>;
+}
 
 export default function SurveyForm() {
-  const [step, setStep] = useState(1);
-  const [answers, setAnswers] = useState<Answers>(initial);
-  const update = (name: keyof Answers, value: string) => {
-    setAnswers(previous => {
-      const next = { ...previous, [name]: value };
-      // Do not retain answers to questions hidden by branching.
-      if (name === "topic") {
-        next.rating = "";
-        next.message = "";
-        next.phone = "";
-      }
-      return next;
-    });
+  const [answers, setAnswers] = useState<SurveyAnswers>({});
+  const [review, setReview] = useState(false);
+  const [enabled, setEnabled] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const heading = useRef<HTMLHeadingElement>(null);
+  const inFlight = useRef(false);
+  useEffect(() => { const controller = new AbortController(); fetch("/api/survey", { cache: "no-store", signal: controller.signal }).then(response => response.ok ? response.json() : { enabled: false }).then(data => setEnabled(data.enabled === true)).catch(() => {}); return () => controller.abort(); }, []);
+  useEffect(() => { if (review || sent) heading.current?.focus(); }, [review, sent]);
+  const update = (id: string, value: string | string[]) => {
+    setAnswers(previous => pruneAnswers({ ...previous, [id]: value }));
+    setError("");
   };
-
-  const validFollowup =
-    (answers.topic === "feedback" && answers.rating && answers.message.trim()) ||
-    (answers.topic === "question" && answers.message.trim()) ||
-    (answers.topic === "callback" && answers.phone.trim());
-
-  function next(event: FormEvent<HTMLFormElement>) {
+  function onReview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (step === 1 && answers.name.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers.email)) setStep(2);
-    if (step === 2 && validFollowup) setStep(3);
+    const result = validateAnswers(answers);
+    if (!result.fields) { setError(result.error || "Please check your answers."); return; }
+    setAnswers(result.fields); setReview(true); setError("");
   }
-
-  return (
-    <section className="phs-native-survey" aria-labelledby="survey-form-heading">
-      <div className="phs-native-survey-preview">
-        <span className="phs-native-survey-preview-dot" aria-hidden="true" />
-        Layout preview · Sample questions only · Responses are not being collected
-      </div>
-      <header className="phs-native-survey-top">
-        <div>
-          <p className="phs-native-survey-overline">YOUR RESPONSES</p>
-          <h2 id="survey-form-heading">A few quick questions.</h2>
-        </div>
-        <span className="phs-native-survey-count">{String(step).padStart(2,"0")} / 03</span>
-      </header>
-      <div className="phs-native-survey-progress" aria-label={`Step ${step} of 3`}>
-        <span style={{width: `${step / 3 * 100}%`}} />
-      </div>
-
-      {step === 3 ? (
-        <section className="phs-native-survey-review">
-          <h3>Preview complete</h3>
-          <p>This shows how a respondent can review their answers. The final survey will be connected to Airtable after its original questions and rules are confirmed.</p>
-          <dl>
-            <div><dt>Name</dt><dd>{answers.name}</dd></div>
-            <div><dt>Email</dt><dd>{answers.email}</dd></div>
-            <div><dt>Topic</dt><dd>{topicOptions.find(x => x.value === answers.topic)?.label}</dd></div>
-            {answers.rating && <div><dt>Rating</dt><dd>{answers.rating} / 5</dd></div>}
-            {answers.message && <div><dt>Details</dt><dd>{answers.message}</dd></div>}
-            {answers.phone && <div><dt>Phone</dt><dd>{answers.phone}</dd></div>}
-          </dl>
-          <div className="phs-native-survey-actions">
-            <button type="button" className="phs-native-survey-back" onClick={() => setStep(2)}>Back</button>
-            <button type="button" className="phs-native-survey-next" onClick={() => {setAnswers(initial);setStep(1);}}>Start over</button>
-          </div>
-          <p className="phs-native-survey-note">No information is saved or submitted in this preview.</p>
-        </section>
-      ) : (
-        <form className="phs-native-survey-form" onSubmit={next}>
-          {step === 1 ? (
-            <>
-              <p className="phs-native-survey-step-label">01 — ABOUT YOU</p>
-              <div className="phs-native-survey-fields">
-                <label>
-                  Full name <span>*</span>
-                  <input type="text" value={answers.name} onChange={e => update("name",e.target.value)} placeholder="Your name" autoComplete="name" maxLength={120} required />
-                </label>
-                <label>
-                  Email address <span>*</span>
-                  <input type="email" value={answers.email} onChange={e => update("email",e.target.value)} placeholder="you@example.com" autoComplete="email" maxLength={180} required />
-                </label>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="phs-native-survey-step-label">02 — TELL US MORE</p>
-              <fieldset className="phs-native-survey-fieldset">
-                <legend>What would you like to share? <span>*</span></legend>
-                <div className="phs-native-survey-choices">
-                  {topicOptions.map(option => (
-                    <label key={option.value} className={answers.topic === option.value ? "selected" : ""}>
-                      <input type="radio" name="topic" value={option.value} checked={answers.topic === option.value} onChange={() => update("topic",option.value)} required />
-                      <span className="phs-native-survey-choice-copy"><strong>{option.label}</strong><small>{option.description}</small></span>
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-              {answers.topic === "feedback" && (
-                <div className="phs-native-survey-branch">
-                  <fieldset className="phs-native-survey-fieldset">
-                    <legend>How would you rate your experience? <span>*</span></legend>
-                    <div className="phs-native-survey-rating">
-                      {[1,2,3,4,5].map(n => <label key={n} className={answers.rating === String(n) ? "selected":""}><input type="radio" name="rating" required value={n} checked={answers.rating === String(n)} onChange={() => update("rating",String(n))} />{n}</label>)}
-                    </div>
-                  </fieldset>
-                  <label className="phs-native-survey-long">What could we do better? <span>*</span>
-                    <textarea required value={answers.message} onChange={e => update("message",e.target.value)} rows={4} maxLength={1000} placeholder="Share your thoughts" />
-                  </label>
-                </div>
-              )}
-              {answers.topic === "question" && (
-                <div className="phs-native-survey-branch">
-                  <label className="phs-native-survey-long">What's your question? <span>*</span>
-                    <textarea required value={answers.message} onChange={e => update("message",e.target.value)} rows={4} maxLength={1000} placeholder="Type your question" />
-                  </label>
-                </div>
-              )}
-              {answers.topic === "callback" && (
-                <div className="phs-native-survey-branch">
-                  <label className="phs-native-survey-long">What number can we call? <span>*</span>
-                    <input required type="tel" autoComplete="tel" maxLength={35} value={answers.phone} onChange={e => update("phone",e.target.value)} placeholder="(555) 555-5555" />
-                  </label>
-                </div>
-              )}
-            </>
-          )}
-          <div className="phs-native-survey-actions">
-            {step === 2 && <button type="button" className="phs-native-survey-back" onClick={() => setStep(1)}>Back</button>}
-            <button type="submit" className="phs-native-survey-next">{step === 1 ? "Continue" : "Review answers"}</button>
-          </div>
-          <p className="phs-native-survey-note">Preview mode. The original survey questions and Airtable response mapping have not been verified.</p>
-        </form>
-      )}
-    </section>
-  );
+  async function submit() {
+    if (!enabled || inFlight.current) return;
+    inFlight.current = true; setSending(true); setError("");
+    try {
+      const response = await fetch("/api/survey", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(answers) });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) { setError(result.error || "We could not confirm your submission. Please contact our team before sending again."); return; }
+      setSent(true); setAnswers({}); setReview(false);
+    } catch { setError("We could not confirm whether your feedback was saved. Please contact our team before sending it again."); }
+    finally { setSending(false); inFlight.current = false; }
+  }
+  return <section className="customer-survey" aria-label="Customer feedback">
+    {!enabled && <div className="customer-preview"><strong>Preview — responses are not being collected here yet.</strong> Please use sample information. To send feedback now, <a href={originalSurvey} target="_blank" rel="noopener noreferrer">open our existing Airtable survey (new tab)</a>. Answers entered here are not transferred.</div>}
+    {enabled && !sent && <p className="customer-help">Your feedback goes to Pitch Health Solutions. Please do not include Medicare IDs, Social Security numbers, or medical details. <a href="/privacy-policy">Privacy Policy</a></p>}
+    {error && <p className="customer-preview" role="alert">{error}</p>}
+    {sent ? <div className="customer-review"><h2 tabIndex={-1} ref={heading}>Thank you for your feedback.</h2><p>Your response has been saved with Pitch Health Solutions.</p></div> : review ? <div className="customer-review"><p className="phs-native-survey-overline">REVIEW YOUR ANSWERS</p><h2 ref={heading} tabIndex={-1}>Your feedback at a glance</h2><p>{enabled ? "Please check your answers before sending." : "Nothing has been sent or saved. Website submission is not available yet."}</p><dl>{fields.filter(field => visible(field, answers) && answers[field.fieldId]?.length).map(field => <div key={field.fieldId}><dt>{field.label}</dt><dd>{Array.isArray(answers[field.fieldId]) ? (answers[field.fieldId] as string[]).join("; ") : answers[field.fieldId]}</dd></div>)}</dl><div className="customer-actions"><button type="button" disabled={sending} onClick={() => setReview(false)}>Edit answers</button>{enabled && <button className="customer-primary" type="button" disabled={sending} onClick={submit}>{sending ? "Sending…" : "Submit feedback"}</button>}<button type="button" disabled={sending} onClick={() => { setAnswers({}); setReview(false); setError(""); }}>Start over</button></div></div> : <form onSubmit={onReview}>
+      <fieldset className="customer-question"><legend className="customer-choice-heading">How would you like to share your feedback? *</legend><div className="customer-mode-grid">{[QUICK, DETAILED].map(value => <label key={value} className={`customer-mode ${answers[MODE_ID] === value ? "is-selected" : ""}`}><input type="radio" name="mode" required checked={answers[MODE_ID] === value} onChange={() => update(MODE_ID, value)} value={value} /><span><strong>{value === QUICK ? "Quick Feedback" : "Detailed Feedback"}</strong><small>{value === QUICK ? "Approximately 1 minute" : "Approximately 3–4 minutes"}</small><span>{value === QUICK ? "A quick check-in on your experience, with room to share a little more." : "Tell us about enrollment, plan benefits, and the support you received."}</span></span></label>)}</div></fieldset>
+      {answers[MODE_ID] && <><div className="customer-section-title"><h2>{answers[MODE_ID] === QUICK ? "Your overall experience" : "Tell us about your experience"}</h2></div><p className="customer-help">Fields marked * are required. Please do not include Medicare IDs, Social Security numbers, or medical details.</p>{fields.filter(field => field.fieldId !== MODE_ID && visible(field, answers)).map(field => <Question key={field.fieldId} field={field} value={answers[field.fieldId]} update={value => update(field.fieldId, value)} />)}<div className="customer-actions"><button className="customer-primary" type="submit">Review answers</button></div>{!enabled && <p className="customer-help">Preview only. No follow-up request or response will be sent.</p>}</>}
+    </form>}
+    <noscript><p>Enable JavaScript or use the existing <a href={originalSurvey}>Airtable survey</a>.</p></noscript>
+  </section>;
 }
