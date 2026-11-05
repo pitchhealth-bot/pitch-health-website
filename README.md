@@ -41,28 +41,52 @@ Before enabling publicly:
 - Test mobile layout, accessibility, redirects and asset hosting.
 - Keep Squarespace live until final approval and DNS cutover.
 
-## Customer survey preview
+## Customer survey integration
 
-`/survey` now offers Quick Feedback (approximately 1 minute) and Detailed Feedback
-(approximately 3–4 minutes). Fields match the three customer survey screenshots
-supplied November 5, 2026 and the existing Airtable form inspected that day:
-https://airtable.com/app4ihGae0XFY7RAD/pagDbB3N19fxL4Ts6/form
+`/survey` offers Quick Feedback (1 minute) and Detailed Feedback (3–4 minutes).
+The source of truth is the captured Airtable form schema in `app/survey/schema.json`,
+read on November 5, 2026 from form `pagDbB3N19fxL4Ts6`.
+The user confirmed destination base `app4ihGae0XFY7RAD` (PHS Compliance).
+The verified form creates records in **Customer Survey Responses** (`tbliyoHDTdMVNYsma`).
+No complaint or recruiting tables are used.
 
-Quick Feedback includes satisfaction (1–5), recommendation (0–5), comments and
-follow-up preference. Detailed Feedback includes agent satisfaction, plan explanation,
-enrollment comfort, coverage expectations, plan issues, customer service contact,
-conditional service satisfaction, recommendation, comments and follow-up preference.
-Only name, experience category and feedback type are required, as in the screenshots.
-Switching paths clears branch-specific answers; changing Customer Service contact
-to No clears its hidden satisfaction answer. The review screen supports editing/reset.
+The schema supplies exact field IDs, select values, required flags and visibility
+rules to both the UI and server validation. This includes required detailed plan
+questions/issues; Other issue and issue-explanation branches; service satisfaction;
+contact-time fields; and required phone if follow-up is requested without the
+optional phone. Hidden answers are removed when their parent answer changes.
 
-This is explicitly a UI preview: answers exist only in React memory, with no API,
-email, analytics event, local/session storage, or submission operation. Review does
-not save a response or request a callback. The original survey link is preserved;
-answers are not transferred into that external form. No real submissions were tested.
+`GET /api/survey` exposes only enabled status. `POST /api/survey` validates the
+origin, bounded JSON body, types, lengths, required answers and exact options,
+then sends only visible whitelisted fields to the verified table. Credentials
+stay server-side. There is no automatic retry after an uncertain write, and the
+UI confirms success only after the server confirms an Airtable record ID.
 
-Before enabling website submissions, confirm the existing survey's exact Airtable
-table and field IDs, select mappings and authorized server credential. Do not reuse
-the unrelated recruiting destination. Confirm all remaining conditional rules and
-validate a designated test submission before enabling intake. Publication/merge is
-separate from this draft implementation.
+Required server configuration (not committed):
+- `SURVEY_AIRTABLE_API_TOKEN`: survey-authorized Airtable token, scoped to this base
+  with `data.records:write`. Use a Secret in the intended Vercel environment.
+- `SURVEY_INTAKE_ENABLED=true`: enable only after credential verification and a
+  designated end-to-end test. No flag or token was configured by this change.
+
+The existing production `AIRTABLE_API_TOKEN` belongs to the recruiting integration;
+its access to the survey base was not verified, and it is not reused here. Until
+the dedicated configuration exists, the site remains explicitly a preview and
+POST returns 503. The original Airtable form link remains available. Preview answers
+are held in memory only and are not sent to Airtable. No live record was created.
+
+Remaining launch checks: configure survey credential, perform a designated synthetic
+end-to-end test with existing automation behavior understood, and add deployment-level
+rate limiting/spam controls. Durable idempotency is not provided by this table schema;
+ambiguous failures tell respondents to contact the team before resending. Merge and
+publication remain pending; do not open a PR until separately approved.
+
+Validation: production build and TypeScript passed. Seven automated tests cover
+exact destination/payload, required detailed and follow-up answers, hidden-field
+removal, invalid input, disabled intake, origin/body limits, and upstream failures.
+Airtable writes were mocked; no credentials or real survey responses were used.
+
+Run tests from this checkout:
+```sh
+./node_modules/.bin/tsc app/survey/survey-schema.ts app/api/survey/route.ts --outDir /tmp/pitch-survey-tests --module commonjs --target es2022 --esModuleInterop --resolveJsonModule --skipLibCheck
+SURVEY_TEST_BUILD=/tmp/pitch-survey-tests NODE_PATH="$PWD/node_modules" node --test tests/survey.test.cjs
+```

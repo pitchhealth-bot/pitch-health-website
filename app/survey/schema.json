@@ -1,0 +1,949 @@
+{
+  "pageId": "pagDbB3N19fxL4Ts6",
+  "interfaceId": null,
+  "name": "💜 Pitch Health Solutions Customer Survey",
+  "description": "Thank you for choosing Pitch Health Solutions!\n\nYou can choose between a Quick Feedback Survey (1 minute) or a Detailed Experience Survey (3–4 minutes).\n\nYour responses help us recognize excellent service, identify opportunities for improvement, and better support your Medicare needs.\n\nYour feedback is confidential within our organization and will not affect your Medicare coverage or benefits.",
+  "submissionAction": "create",
+  "sourceTableId": "tbliyoHDTdMVNYsma",
+  "sourceTableName": "Customer Survey Responses",
+  "sections": [
+    {
+      "id": "pelNzJyqR1VVDRFHu",
+      "title": "Group 1",
+      "isInitiallyCollapsed": false,
+      "rows": [
+        {
+          "elements": [
+            {
+              "fieldId": "fldFzcaCukYELruv4",
+              "label": "Full Name",
+              "fieldType": "singleLineText",
+              "isRequired": true,
+              "isReadOnly": false
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldjZCvIFfAzVZpw8",
+              "label": "Phone Number",
+              "fieldType": "phoneNumber",
+              "isRequired": false,
+              "isReadOnly": false
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldf8bRx7eNBeYKYi",
+              "label": "Email Address",
+              "fieldType": "email",
+              "isRequired": false,
+              "isReadOnly": false
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldsxlwu6O1JOs7nl",
+              "label": "Which part of your experience are you reviewing?",
+              "fieldType": "singleSelect",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selR83apzAcgiforf",
+                    "name": "Enrollment / Sales Experience"
+                  },
+                  {
+                    "id": "selJ5As4SFswcXR9A",
+                    "name": "Customer Service Experience"
+                  },
+                  {
+                    "id": "selYjSi331DQ2Terw",
+                    "name": "Medicare Plan Benefits & Coverage"
+                  },
+                  {
+                    "id": "selwk5FiWMFDl4RRN",
+                    "name": "Overall Experience with Pitch Health Solutions"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldksabVKCXVgncmD",
+              "label": "How would you like to share your feedback?",
+              "fieldType": "singleSelect",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selSNqHgR5vz64wvH",
+                    "name": "Quick Feedback (Approximately 1 Minute)"
+                  },
+                  {
+                    "id": "sel5aeokzLReTlbFy",
+                    "name": "Detailed Feedback (Approximately 3–4 Minutes)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldbhA3Yu4n9YLGzO",
+              "label": "How satisfied are you with your overall experience with Pitch Health Solutions?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "sel8FMfWRXzgBjc7V",
+                    "name": "1 — Very Dissatisfied"
+                  },
+                  {
+                    "id": "selWkkG41l8K1Rebl",
+                    "name": "2 — Dissatisfied"
+                  },
+                  {
+                    "id": "selj4GaOmUtbQEZNY",
+                    "name": "3 — Neutral"
+                  },
+                  {
+                    "id": "selzckcQK1H6cbVzI",
+                    "name": "4 — Satisfied"
+                  },
+                  {
+                    "id": "sel6UsxaehgtH7ahb",
+                    "name": "5 — Very Satisfied"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selSNqHgR5vz64wvH",
+                      "choiceName": "Quick Feedback (Approximately 1 Minute)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "flduGvcrCyI1hBLux",
+              "label": "How likely are you to recommend Pitch Health Solutions to a friend or family member?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selXEpO1pecyBDPp5",
+                    "name": "0 — Not at all likely"
+                  },
+                  {
+                    "id": "sel0Q9pdGYwwxWPq2",
+                    "name": "1 — Very unlikely"
+                  },
+                  {
+                    "id": "selNCrmOkvYhNKne9",
+                    "name": "2 — Unlikely"
+                  },
+                  {
+                    "id": "selkdrkp9MD7UCEyH",
+                    "name": "3 — Neutral"
+                  },
+                  {
+                    "id": "selc3iyc445maVSgk",
+                    "name": "4 — Likely"
+                  },
+                  {
+                    "id": "seltiNVBC7a5SCQM9",
+                    "name": "5 — Extremely likely"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selSNqHgR5vz64wvH",
+                      "choiceName": "Quick Feedback (Approximately 1 Minute)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldp4SEv6dnBINIO8",
+              "label": "Would you like to share anything about your experience?",
+              "fieldType": "multilineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selSNqHgR5vz64wvH",
+                      "choiceName": "Quick Feedback (Approximately 1 Minute)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldHnowy78veMuSRR",
+              "label": "Would you like someone from our team to contact you regarding your feedback?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "sel3X93FcbLf4n9zC",
+                    "name": "Yes, I would like someone to contact me"
+                  },
+                  {
+                    "id": "selhha1ZWNWNZmaSm",
+                    "name": "No, thank you"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selSNqHgR5vz64wvH",
+                      "choiceName": "Quick Feedback (Approximately 1 Minute)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fld6CeCTwH8lf4SBK",
+              "label": "Best time to contact you",
+              "fieldType": "singleLineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selSNqHgR5vz64wvH",
+                      "choiceName": "Quick Feedback (Approximately 1 Minute)"
+                    }
+                  },
+                  {
+                    "fieldId": "fldHnowy78veMuSRR",
+                    "fieldName": "Quick — Contact requested",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel3X93FcbLf4n9zC",
+                      "choiceName": "Yes, I would like someone to contact me"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fld4bY8G2HxnogbGe",
+              "label": "How satisfied were you with the agent who helped you review or enroll in your Medicare plan?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selXGWhSDDmQzwZvX",
+                    "name": "Very Satisfied"
+                  },
+                  {
+                    "id": "selwQSEhWAFEwyvKC",
+                    "name": "Satisfied"
+                  },
+                  {
+                    "id": "selgLroYAz5D2dTG2",
+                    "name": "Neutral"
+                  },
+                  {
+                    "id": "sel1SgMHbCUWCfZIu",
+                    "name": "Dissatisfied"
+                  },
+                  {
+                    "id": "selOto3TgWiV6TYIB",
+                    "name": "Very Dissatisfied"
+                  },
+                  {
+                    "id": "selGxmsCIbJrzTAnF",
+                    "name": "I have not worked with a sales agent."
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "flduBS3r98nGEwFwE",
+              "label": "Did your agent clearly explain your plan's benefits, costs, and coverage before enrollment?",
+              "fieldType": "singleSelect",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selSBb9rLme3WSOmq",
+                    "name": "Yes, everything was clearly explained"
+                  },
+                  {
+                    "id": "selNJUZqAFcUHDgl6",
+                    "name": "Mostly, but I had some questions"
+                  },
+                  {
+                    "id": "seliwefq1qxtjRDLo",
+                    "name": "No, some important information was not explained"
+                  },
+                  {
+                    "id": "sellaJxkI1edmmqLE",
+                    "name": "I don't remember"
+                  },
+                  {
+                    "id": "selEYibZxQFqaHs4N",
+                    "name": "Not applicable."
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldlgIvwmQ3qSv6jQ",
+              "label": "Did you feel comfortable making your enrollment decision without being pressured?",
+              "fieldType": "singleSelect",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "sel8IewCK4uaLCHKB",
+                    "name": "Yes, completely comfortable"
+                  },
+                  {
+                    "id": "sel0EAbQqZT1Qv8HY",
+                    "name": "Somewhat comfortable"
+                  },
+                  {
+                    "id": "selzWlnofpLOgFxqv",
+                    "name": "No, I felt pressured or rushed"
+                  },
+                  {
+                    "id": "sel0lmHRuDNEzQ1E0",
+                    "name": "I don't remember"
+                  },
+                  {
+                    "id": "selFODElqueSeWuE0",
+                    "name": "Not applicable."
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldYE2a5uDKiluG1l",
+              "label": "Have the benefits and coverage you've received matched what your agent explained?",
+              "fieldType": "singleSelect",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selLasrAzBjjv5RlX",
+                    "name": "Yes, everything matches"
+                  },
+                  {
+                    "id": "selBAD0tG8L6QWSnX",
+                    "name": "Mostly, with minor differences"
+                  },
+                  {
+                    "id": "selVYIN6jGbP68ddP",
+                    "name": "No, some benefits or costs were different"
+                  },
+                  {
+                    "id": "sel6qvmQuVMp6jCjr",
+                    "name": "My coverage hasn't started yet"
+                  },
+                  {
+                    "id": "sel8VXYJb2UJ5YaY8",
+                    "name": "I'm not sure."
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldsIHH5KAyV1oQio",
+              "label": "Have you experienced any of the following issues with your Medicare plan?",
+              "fieldType": "multipleSelects",
+              "isRequired": true,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selJcSBQKWYbh3xrs",
+                    "name": "My doctor or hospital was not covered"
+                  },
+                  {
+                    "id": "selMyovCYDasEODYk",
+                    "name": "My medications were not covered or cost more than expected"
+                  },
+                  {
+                    "id": "selA4hkQlCKKTUfj6",
+                    "name": "My OTC, Food Card, or Giveback benefits were different than expected"
+                  },
+                  {
+                    "id": "selPn5QO3lnhITOJQ",
+                    "name": "My copays, premiums, or other costs were higher than expected"
+                  },
+                  {
+                    "id": "selgQYUAZQBo4Wt4p",
+                    "name": "My plan changed without my understanding or permission"
+                  },
+                  {
+                    "id": "selZzXuE4zvOsHp79",
+                    "name": "I experienced delays or issues with my coverage"
+                  },
+                  {
+                    "id": "selZcDWytnPW5J6kK",
+                    "name": "I have not experienced any issues"
+                  },
+                  {
+                    "id": "seljMnf73RiDcMmkp",
+                    "name": "Other"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldyKV0pF6Hfrf0KF",
+              "label": "Other issue — please specify",
+              "fieldType": "singleLineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  },
+                  {
+                    "fieldId": "fldsIHH5KAyV1oQio",
+                    "fieldName": "Plan — Issues experienced",
+                    "operator": "|",
+                    "value": [
+                      {
+                        "choiceId": "seljMnf73RiDcMmkp",
+                        "choiceName": "Other"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldYpd7M9YB3pckvU",
+              "label": "Please briefly explain what happened",
+              "fieldType": "multilineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  },
+                  {
+                    "fieldId": "fldsIHH5KAyV1oQio",
+                    "fieldName": "Plan — Issues experienced",
+                    "operator": "|",
+                    "value": [
+                      {
+                        "choiceId": "selJcSBQKWYbh3xrs",
+                        "choiceName": "My doctor or hospital was not covered"
+                      },
+                      {
+                        "choiceId": "selMyovCYDasEODYk",
+                        "choiceName": "My medications were not covered or cost more than expected"
+                      },
+                      {
+                        "choiceId": "selA4hkQlCKKTUfj6",
+                        "choiceName": "My OTC, Food Card, or Giveback benefits were different than expected"
+                      },
+                      {
+                        "choiceId": "selPn5QO3lnhITOJQ",
+                        "choiceName": "My copays, premiums, or other costs were higher than expected"
+                      },
+                      {
+                        "choiceId": "selgQYUAZQBo4Wt4p",
+                        "choiceName": "My plan changed without my understanding or permission"
+                      },
+                      {
+                        "choiceId": "selZzXuE4zvOsHp79",
+                        "choiceName": "I experienced delays or issues with my coverage"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldd8eIcR9eve983F",
+              "label": "Have you contacted our Customer Service team for assistance?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selj7SCL44lgYMPNw",
+                    "name": "Yes"
+                  },
+                  {
+                    "id": "selGRC8uaTn0Z8VPm",
+                    "name": "No"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldXM35pbwrmQZGrW",
+              "label": "How satisfied were you with the assistance provided by our Customer Service team?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selECHE846BzEgtkD",
+                    "name": "Very Satisfied"
+                  },
+                  {
+                    "id": "selsB7Znj3dbyAuPt",
+                    "name": "Satisfied"
+                  },
+                  {
+                    "id": "selleOXYqTE8MjIHN",
+                    "name": "Neutral"
+                  },
+                  {
+                    "id": "selSFRk8peN2kXGGa",
+                    "name": "Dissatisfied"
+                  },
+                  {
+                    "id": "selfj10Nqmwx7JcYP",
+                    "name": "Very Dissatisfied"
+                  },
+                  {
+                    "id": "selDKHNPF8qWJL4Hb",
+                    "name": "My concern has not been resolved yet."
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  },
+                  {
+                    "fieldId": "fldd8eIcR9eve983F",
+                    "fieldName": "Customer Service — Contacted team",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selj7SCL44lgYMPNw",
+                      "choiceName": "Yes"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldlbMerr5fXQ9Aj3",
+              "label": "How likely are you to recommend Pitch Health Solutions to a friend or family member?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "sele58BTs29Q97rB4",
+                    "name": "0 — Not at all likely"
+                  },
+                  {
+                    "id": "sel1jMOmkNs02X36l",
+                    "name": "1 — Very unlikely"
+                  },
+                  {
+                    "id": "selHWjAknt00NWtg5",
+                    "name": "2 — Unlikely"
+                  },
+                  {
+                    "id": "sel62ygGony4pPQ1F",
+                    "name": "3 — Neutral"
+                  },
+                  {
+                    "id": "selMaAiePBt9xxeRI",
+                    "name": "4 — Likely"
+                  },
+                  {
+                    "id": "selPufz1SHjlU4jc2",
+                    "name": "5 — Extremely likely"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldqYHAdOzRVIwKaU",
+              "label": "What could we have done better to improve your experience?",
+              "fieldType": "multilineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fld1S4AqWBftqzjSE",
+              "label": "Would you like someone from our team to contact you regarding your feedback?",
+              "fieldType": "singleSelect",
+              "isRequired": false,
+              "isReadOnly": false,
+              "options": {
+                "choices": [
+                  {
+                    "id": "selIyEd4NHx7fEtJN",
+                    "name": "Yes, I would like someone to contact me"
+                  },
+                  {
+                    "id": "selRiNpiZDTgZnems",
+                    "name": "No, thank you"
+                  }
+                ]
+              },
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fldNvAwWkbMmcHiRs",
+              "label": "Best time to contact you",
+              "fieldType": "singleLineText",
+              "isRequired": false,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "fieldId": "fldksabVKCXVgncmD",
+                    "fieldName": "How would you like to share your feedback?",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "sel5aeokzLReTlbFy",
+                      "choiceName": "Detailed Feedback (Approximately 3–4 Minutes)"
+                    }
+                  },
+                  {
+                    "fieldId": "fld1S4AqWBftqzjSE",
+                    "fieldName": "Overall — Contact requested",
+                    "operator": "=",
+                    "value": {
+                      "choiceId": "selIyEd4NHx7fEtJN",
+                      "choiceName": "Yes, I would like someone to contact me"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "elements": [
+            {
+              "fieldId": "fld3KLl1TFY1YMH8f",
+              "label": "Phone Number",
+              "fieldType": "phoneNumber",
+              "isRequired": true,
+              "isReadOnly": false,
+              "visibilityFilters": {
+                "conjunction": "and",
+                "filterSet": [
+                  {
+                    "conjunction": "or",
+                    "filterSet": [
+                      {
+                        "fieldId": "fldHnowy78veMuSRR",
+                        "fieldName": "Quick — Contact requested",
+                        "operator": "=",
+                        "value": {
+                          "choiceId": "sel3X93FcbLf4n9zC",
+                          "choiceName": "Yes, I would like someone to contact me"
+                        }
+                      },
+                      {
+                        "fieldId": "fld1S4AqWBftqzjSE",
+                        "fieldName": "Overall — Contact requested",
+                        "operator": "=",
+                        "value": {
+                          "choiceId": "selIyEd4NHx7fEtJN",
+                          "choiceName": "Yes, I would like someone to contact me"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "fieldId": "fldjZCvIFfAzVZpw8",
+                    "fieldName": "Phone Number — Optional",
+                    "operator": "isEmpty",
+                    "value": null
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
