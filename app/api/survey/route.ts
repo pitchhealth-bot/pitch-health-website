@@ -3,12 +3,22 @@ import { validateAnswers } from "../../survey/survey-schema";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-const configured = () => process.env.SURVEY_INTAKE_ENABLED === "true" && Boolean(process.env.SURVEY_AIRTABLE_API_TOKEN);
+const token = () => process.env.SURVEY_AIRTABLE_API_TOKEN || process.env.AIRTABLE_API_TOKEN;
+const configured = () => process.env.SURVEY_INTAKE_ENABLED === "true" && Boolean(token());
 const headers = { "Cache-Control": "no-store" };
 const destination = "https://api.airtable.com/v0/app4ihGae0XFY7RAD/tbliyoHDTdMVNYsma";
 
 export async function GET() {
-  return NextResponse.json({ enabled: configured() }, { headers });
+  if (!configured()) return NextResponse.json({ enabled: false }, { headers });
+  try {
+    // Read-only preflight: verify this deployed credential can reach the exact table.
+    // Do not return, log, or retain any response records.
+    const response = await fetch(`${destination}?maxRecords=1&fields%5B%5D=fldFzcaCukYELruv4`, {
+      headers: { Authorization: `Bearer ${token()}` }, cache: "no-store", signal: AbortSignal.timeout(8000),
+    });
+    await response.body?.cancel();
+    return NextResponse.json({ enabled: response.ok }, { headers });
+  } catch { return NextResponse.json({ enabled: false }, { headers }); }
 }
 
 export async function POST(request: Request) {
@@ -36,7 +46,7 @@ export async function POST(request: Request) {
   try {
     const response = await fetch(destination, {
       method: "POST",
-      headers: { Authorization: `Bearer ${process.env.SURVEY_AIRTABLE_API_TOKEN}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${token()}`, "Content-Type": "application/json" },
       body: JSON.stringify({ records: [{ fields: validated.fields }], typecast: false }),
       cache: "no-store",
       signal: AbortSignal.timeout(15000),

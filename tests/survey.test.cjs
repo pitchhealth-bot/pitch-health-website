@@ -29,7 +29,7 @@ test('hidden service, contact time, and issue details are pruned',()=>{
 test('invalid select, type, contact and length rejected',()=>{
  for(const bad of [{[experience]:'invented'},{[name]:'   '},{fldf8bRx7eNBeYKYi:'bad-email'},{[optionalPhone]:'abcdefg'},{[name]:'x'.repeat(251)},{[name]:[]}]) assert.ok(validateAnswers({...quick,...bad}).error);
 });
-test('endpoint stays disabled without dedicated token and flag',async()=>{
+test('endpoint stays disabled without survey enablement and a token',async()=>{
  delete process.env.SURVEY_INTAKE_ENABLED; delete process.env.SURVEY_AIRTABLE_API_TOKEN;
  assert.equal((await (await GET()).json()).enabled,false); assert.equal((await POST(request(quick))).status,503);
 });
@@ -48,4 +48,15 @@ test('server verifies origin, validates, bounds body and writes only verified de
  global.fetch=async()=>Response.json({error:'rejected'},{status:403});assert.equal((await POST(request(quick))).status,502);
  global.fetch=async()=>{throw Error('timeout')};const result=await POST(request(quick));assert.equal(result.status,502);assert.match((await result.json()).error,/before sending it again/);
  }finally{global.fetch=oldFetch;delete process.env.SURVEY_INTAKE_ENABLED;delete process.env.SURVEY_AIRTABLE_API_TOKEN;}
+});
+
+test('reuses existing website credential and fails closed when table access is rejected',async()=>{
+ process.env.SURVEY_INTAKE_ENABLED='true';process.env.AIRTABLE_API_TOKEN='existing-test-placeholder';
+ const oldFetch=global.fetch;let auth;
+ try {
+ global.fetch=async(url,options)=>{auth=options.headers.Authorization;assert.match(url,/app4ihGae0XFY7RAD\/tbliyoHDTdMVNYsma/);return Response.json({records:[]});};
+ assert.equal((await (await GET()).json()).enabled,true);assert.equal(auth,'Bearer existing-test-placeholder');
+ global.fetch=async()=>new Response(null,{status:403});assert.equal((await (await GET()).json()).enabled,false);
+ global.fetch=async()=>{throw Error('timeout')};assert.equal((await (await GET()).json()).enabled,false);
+ } finally {global.fetch=oldFetch;delete process.env.AIRTABLE_API_TOKEN;delete process.env.SURVEY_INTAKE_ENABLED;}
 });

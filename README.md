@@ -62,25 +62,33 @@ then sends only visible whitelisted fields to the verified table. Credentials
 stay server-side. There is no automatic retry after an uncertain write, and the
 UI confirms success only after the server confirms an Airtable record ID.
 
-Required server configuration (not committed):
-- `SURVEY_AIRTABLE_API_TOKEN`: survey-authorized Airtable token, scoped to this base
-  with `data.records:write`. Use a Secret in the intended Vercel environment.
-- `SURVEY_INTAKE_ENABLED=true`: enable only after credential verification and a
-  designated end-to-end test. No flag or token was configured by this change.
+Server configuration (not committed):
+- Reuse the existing production `AIRTABLE_API_TOKEN` where it has access to this
+  survey base. An optional `SURVEY_AIRTABLE_API_TOKEN` overrides it if separate
+  credentials are desired; a new token is not inherently required.
+- `SURVEY_INTAKE_ENABLED=true`: enable the survey integration independently of
+  recruiting. No environment variables were changed by this work.
 
-The existing production `AIRTABLE_API_TOKEN` belongs to the recruiting integration;
-its access to the survey base was not verified, and it is not reused here. Until
-the dedicated configuration exists, the site remains explicitly a preview and
-POST returns 503. The original Airtable form link remains available. Preview answers
+The user confirmed the existing API access covers this base, with a supporting screenshot.
+The Charla PHS browser shows an existing token named “charla's” with record read/write
+and all-base access. Vercel confirms an existing production AIRTABLE_API_TOKEN
+Secret, but does not disclose its value or token identity. Its exact match to that
+Airtable token cannot be verified from metadata. GET /api/survey therefore performs
+an authenticated read-only check of the exact survey table before enabling the UI.
+No returned records are logged, retained or sent to the browser. Successful reading
+proves table access, not write permission; a designated submission test is still needed.
+
+Until the survey flag is enabled, the site remains explicitly a preview and POST
+returns 503. The original Airtable form link remains available. Preview answers
 are held in memory only and are not sent to Airtable. No live record was created.
 
-Remaining launch checks: configure survey credential, perform a designated synthetic
+Remaining launch checks: verify the existing deployed credential, perform a designated synthetic
 end-to-end test with existing automation behavior understood, and add deployment-level
 rate limiting/spam controls. Durable idempotency is not provided by this table schema;
 ambiguous failures tell respondents to contact the team before resending. Merge and
 publication remain pending; do not open a PR until separately approved.
 
-Validation: production build and TypeScript passed. Seven automated tests cover
+Validation: production build and TypeScript passed. Eight automated tests cover
 exact destination/payload, required detailed and follow-up answers, hidden-field
 removal, invalid input, disabled intake, origin/body limits, and upstream failures.
 Airtable writes were mocked; no credentials or real survey responses were used.
