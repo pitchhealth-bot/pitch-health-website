@@ -3,13 +3,13 @@ import Link from "next/link";
 import OfficialLogo from "../OfficialLogo";
 import BusinessHoursStatus from "../BusinessHoursStatus";
 import SiteFooter from "../SiteFooter";
+import SurveyForm from "./SurveyForm";
 
 export const metadata: Metadata = {
-  title: "Survey | Pitch Health Solutions",
-  description: "Access the Pitch Health Solutions Airtable survey.",
+  title: "Customer Survey",
+  description: "Share your experience with Pitch Health Solutions through Quick Feedback or Detailed Feedback.",
 };
 
-const originalSurvey = "https://airtable.com/app4ihGae0XFY7RAD/pagDbB3N19fxL4Ts6/form";
 
 export default function SurveyPage() {
   return (
@@ -30,18 +30,14 @@ export default function SurveyPage() {
       <main className="phs-survey-page">
         <section className="phs-survey-header">
           <div className="container phs-survey-header-inner">
-            <p className="phs-survey-eyebrow">PITCH HEALTH SOLUTIONS</p>
-            <h1>Survey</h1>
+            <p className="phs-survey-eyebrow">CUSTOMER SURVEY</p>
+            <h1>Your experience matters.</h1>
+            <p>Thank you for choosing Pitch Health Solutions. Your feedback helps us recognize excellent service and better support your Medicare needs.</p>
           </div>
         </section>
         <section className="phs-survey-section" aria-label="Survey access">
           <div className="container">
-            <div className="phs-survey-source-card">
-              <h2>Open the survey</h2>
-              <p>Use the original Airtable form to answer the current questions. This page will be replaced with a native survey after the exact questions and conditional rules are verified.</p>
-              <a className="phs-survey-source-link" href={originalSurvey} target="_blank" rel="noopener noreferrer">Open survey</a>
-              <p className="phs-survey-source-note">The website is not collecting survey responses here yet.</p>
-            </div>
+            <SurveyForm />
           </div>
         </section>
       </main>

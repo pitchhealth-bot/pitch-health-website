@@ -40,3 +40,29 @@ Before enabling publicly:
 - Review legal language and links against the live website.
 - Test mobile layout, accessibility, redirects and asset hosting.
 - Keep Squarespace live until final approval and DNS cutover.
+
+## Customer survey preview
+
+`/survey` now offers Quick Feedback (approximately 1 minute) and Detailed Feedback
+(approximately 3–4 minutes). Fields match the three customer survey screenshots
+supplied November 5, 2026 and the existing Airtable form inspected that day:
+https://airtable.com/app4ihGae0XFY7RAD/pagDbB3N19fxL4Ts6/form
+
+Quick Feedback includes satisfaction (1–5), recommendation (0–5), comments and
+follow-up preference. Detailed Feedback includes agent satisfaction, plan explanation,
+enrollment comfort, coverage expectations, plan issues, customer service contact,
+conditional service satisfaction, recommendation, comments and follow-up preference.
+Only name, experience category and feedback type are required, as in the screenshots.
+Switching paths clears branch-specific answers; changing Customer Service contact
+to No clears its hidden satisfaction answer. The review screen supports editing/reset.
+
+This is explicitly a UI preview: answers exist only in React memory, with no API,
+email, analytics event, local/session storage, or submission operation. Review does
+not save a response or request a callback. The original survey link is preserved;
+answers are not transferred into that external form. No real submissions were tested.
+
+Before enabling website submissions, confirm the existing survey's exact Airtable
+table and field IDs, select mappings and authorized server credential. Do not reuse
+the unrelated recruiting destination. Confirm all remaining conditional rules and
+validate a designated test submission before enabling intake. Publication/merge is
+separate from this draft implementation.
