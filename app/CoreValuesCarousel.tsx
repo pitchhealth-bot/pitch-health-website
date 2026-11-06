@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 
 const values = [
   {
@@ -32,9 +32,23 @@ const values = [
 
 export default function CoreValuesCarousel() {
   const [current, setCurrent] = useState(0);
-  const [startX, setStartX] = useState<number | null>(null);
+  const gesture = useRef<{ id: number; x: number; y: number } | null>(null);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const count = values.length;
   const advance = (step: number) => setCurrent(i => (i + step + count) % count);
+
+  function finishDrag(event: PointerEvent<HTMLDivElement>, cancelled = false) {
+    const start = gesture.current;
+    if (!start || start.id !== event.pointerId) return;
+    gesture.current = null;
+    setDragging(false);
+    setDragX(0);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (!cancelled && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) advance(dx < 0 ? 1 : -1);
+  }
 
   return (
     <section className="core-values-section" aria-labelledby="values-title">
@@ -51,17 +65,27 @@ export default function CoreValuesCarousel() {
           </div>
         </div>
         <div
-          className="core-values-stage"
+          className={"core-values-stage" + (dragging ? " is-dragging" : "")}
+          role="region"
           aria-roledescription="carousel"
           aria-label="Pitch Health core values"
-          onTouchStart={e => setStartX(e.touches[0].clientX)}
-          onTouchEnd={e => {
-            if (startX !== null) {
-              const distance = e.changedTouches[0].clientX - startX;
-              if (Math.abs(distance) > 50) advance(distance < 0 ? 1 : -1);
-            }
-            setStartX(null);
+          onPointerDown={event => {
+            if (!event.isPrimary || event.button !== 0 || gesture.current) return;
+            if ((event.target as HTMLElement).closest("a,button,input,textarea,select")) return;
+            gesture.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
+            event.currentTarget.setPointerCapture(event.pointerId);
+            setDragging(true);
           }}
+          onPointerMove={event => {
+            const start = gesture.current;
+            if (!start || start.id !== event.pointerId) return;
+            const dx = event.clientX - start.x;
+            const dy = event.clientY - start.y;
+            setDragX(Math.abs(dx) > Math.abs(dy) ? dx : 0);
+          }}
+          onPointerUp={event => finishDrag(event)}
+          onPointerCancel={event => finishDrag(event, true)}
+          onLostPointerCapture={event => finishDrag(event, true)}
           onKeyDown={e => {
             if (e.key === "ArrowRight") { e.preventDefault(); advance(1); }
             if (e.key === "ArrowLeft") { e.preventDefault(); advance(-1); }
@@ -80,7 +104,7 @@ export default function CoreValuesCarousel() {
                   opacity: visible ? 1 : 0,
                   pointerEvents: offset === 0 ? "auto" : "none",
                   transform: visible
-                    ? `translate3d(${offset * 30}px,${offset * 19}px,0) scale(${1 - offset * 0.045})`
+                    ? `translate3d(${offset * 30 + (offset === 0 ? dragX : 0)}px,${offset * 19}px,0) scale(${1 - offset * 0.045})`
                     : "translate3d(120px,36px,0) scale(.84)",
                   borderTopColor: value.accent,
                 }}
@@ -105,7 +129,7 @@ export default function CoreValuesCarousel() {
               <button key={i} type="button" aria-label={`Show core value ${i + 1}`} aria-current={current === i ? "true" : undefined} className={current === i ? "active" : ""} onClick={() => setCurrent(i)} />
             )}
           </div>
-          <span>Use arrows or swipe to explore</span>
+          <span>Drag, swipe, or use arrows to explore</span>
         </div>
       </div>
     </section>

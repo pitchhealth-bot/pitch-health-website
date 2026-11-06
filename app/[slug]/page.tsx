@@ -24,7 +24,7 @@ export default async function Subpage({params}:{params:Promise<{slug:string}>}){
 <div className="career-benefits-heading"><p className="career-benefits-kicker">THE OPPORTUNITY</p><h2>Here’s what the role includes:</h2></div>
 <div className="career-benefits-grid">
   <article className="career-benefit"><span>01</span><div className="career-benefit-text"><h3>Uncapped earning potential with base salary + commissions</h3><p>A combination of fixed pay and performance-based commissions, with no stated cap on earning potential.</p></div></article>
-  <article className="career-benefit"><span>02</span><div className="career-benefit-text"><h3>Paid 2 to 4 week onboarding with live call training</h3><p>Start with paid onboarding and live-call practice designed to help you become familiar with the role.</p></div></article>
+  <article className="career-benefit"><span>02</span><div className="career-benefit-text"><h3>An opportunity to earn while you get licensed and contracted</h3><p>Explore earning opportunities as you work toward completing your licensing and contracting requirements.</p></div></article>
   <article className="career-benefit"><span>03</span><div className="career-benefit-text"><h3>Monday to Friday, 9 AM - 6 PM EST (1 PM - 2 PM lunch)</h3><p>A consistent weekday schedule with a designated one-hour lunch break.</p></div></article>
   <article className="career-benefit"><span>04</span><div className="career-benefit-text"><h3>Supportive leadership and a clear, long-term career path</h3><p>A role focused on developing your skills with guidance from the team and room for long-term growth.</p></div></article>
 </div>
