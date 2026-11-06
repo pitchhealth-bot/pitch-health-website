@@ -1566,3 +1566,8 @@
   .site-header nav{flex-wrap:wrap;gap:4px 14px;justify-content:center;padding-top:4px}
   .site-header nav a{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* Pointer dragging preserves native vertical touch scrolling. */
+.core-values-stage{cursor:grab;user-select:none;-webkit-user-select:none}
+.core-values-stage.is-dragging{cursor:grabbing}
+.core-values-stage.is-dragging .core-value-card.is-active{transition:none}
