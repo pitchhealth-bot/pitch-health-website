@@ -181,7 +181,7 @@ export default function ApplicationForm() {
               <label className="application-upload">
                 <input type="file" name="resume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required onChange={event => {
                   const file = event.target.files?.[0];
-                  if (file && !/\\.(pdf|doc|docx)$/i.test(file.name)) {
+                  if (file && !/\.(pdf|doc|docx)$/i.test(file.name)) {
                     event.target.value = "";
                     setResumeName("");
                     setResumeError("Unsupported file type. Please upload a PDF, DOC, or DOCX résumé. Images and screenshots are not accepted.");
